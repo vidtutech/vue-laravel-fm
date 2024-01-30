@@ -1,6 +1,6 @@
 <template>
     <transition name="fm-modal">
-        <div class="fm-modal modal" ref="fmModal" v-on:click="hideModal">
+        <div class="fm-modal bg-white dark:bg-black rounded-xl modal" ref="fmModal" v-on:click="hideModal">
             <div class="modal-dialog" role="document" v-bind:class="modalSize" v-on:click.stop>
                 <component v-bind:is="modalName" />
             </div>
@@ -17,13 +17,11 @@ import ClipboardModal from './views/ClipboardModal.vue';
 import StatusModal from './views/StatusModal.vue';
 import RenameModal from './views/RenameModal.vue';
 import PropertiesModal from './views/PropertiesModal.vue';
-import PreviewModal from './views/PreviewModal.vue';
 import TextEditModal from './views/TextEditModal.vue';
 import AudioPlayerModal from './views/AudioPlayerModal.vue';
 import VideoPlayerModal from './views/VideoPlayerModal.vue';
 import ZipModal from './views/ZipModal.vue';
 import UnzipModal from './views/UnzipModal.vue';
-import AboutModal from './views/AboutModal.vue';
 
 export default {
     name: 'ModalBlock',
@@ -36,13 +34,11 @@ export default {
         StatusModal,
         RenameModal,
         PropertiesModal,
-        PreviewModal,
         TextEditModal,
         AudioPlayerModal,
         VideoPlayerModal,
         ZipModal,
         UnzipModal,
-        AboutModal,
     },
     mounted() {
         // set height
@@ -90,7 +86,7 @@ export default {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.35);
+
     display: block;
     transition: opacity 0.4s ease;
     overflow: auto;

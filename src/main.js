@@ -11,4 +11,8 @@ const store = createStore({
     modules: { fm },
 });
 
-window.fm = createApp(App).use(store).mount('#fm');
+window.mountFm = () => {
+    window.fm = createApp(App).use(store).mount('#fm');
+};
+
+window.mountFm();

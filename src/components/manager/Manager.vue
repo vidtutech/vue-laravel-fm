@@ -1,8 +1,8 @@
 <template>
-    <div class="fm-content d-flex flex-column">
+    <div class="flex flex-col size-full">
         <disk-list v-bind:manager="manager" />
         <bread-crumb v-bind:manager="manager" />
-        <div class="fm-content-body">
+        <div class="overflow-auto">
             <table-view v-if="viewType === 'table'" v-bind:manager="manager" />
             <grid-view v-else v-bind:manager="manager" />
         </div>
@@ -38,13 +38,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-content {
-    padding-left: 1rem;
-
-    .fm-content-body {
-        overflow: auto;
-    }
-}
-</style>

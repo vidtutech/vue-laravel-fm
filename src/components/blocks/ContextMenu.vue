@@ -4,12 +4,18 @@
         v-if="menuVisible"
         v-bind:style="menuStyle"
         v-on:blur="closeMenu"
-        class="fm-context-menu"
+        class="fm-context-menu bg-light dark:bg-dark shadow-sm shadow-dark/50 dark:shadow-light/50 rounded-2xl overflow-hidden"
         tabindex="-1"
     >
-        <ul v-for="(group, index) in menu" v-bind:key="`g-${index}`" class="list-unstyled">
+        <ul v-for="(group, index) in menu" v-bind:key="`g-${index}`" class="list-unstyled text-dark dark:text-light">
             <template v-for="(item, index) in group">
-                <li v-if="showMenuItem(item.name)" v-on:click="menuAction(item.name)" v-bind:key="`i-${index}`">
+                <li
+                    class="hover:bg-dark/20 dark:hover:bg-light/20 flex gap-4 w-full p-2 px-4"
+                    title="`${lang.contextMenu[item.name]}`"
+                    v-if="showMenuItem(item.name)"
+                    v-on:click="menuAction(item.name)"
+                    v-bind:key="`i-${index}`"
+                >
                     <i class="bi" v-bind:class="item.icon" />
                     {{ lang.contextMenu[item.name] }}
                 </li>
@@ -142,8 +148,6 @@ export default {
 .fm-context-menu {
     position: absolute;
     z-index: 9997;
-    background-color: white;
-    box-shadow: 3px 2px 5px gray;
     border-radius: 5px;
 
     &:focus {
@@ -155,20 +159,8 @@ export default {
         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     }
 
-    ul > li {
-        padding: 0.4rem 1rem;
-    }
-
     ul > li:not(.disabled) {
         cursor: pointer;
-
-        &:hover {
-            background-color: #f8f9fa;
-        }
-
-        i {
-            padding-right: 1.5rem;
-        }
     }
 }
 </style>

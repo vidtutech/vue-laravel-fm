@@ -3,28 +3,28 @@
         <table class="table table-sm">
             <thead>
                 <tr>
-                    <th class="w-65" v-on:click="sortBy('name')">
+                    <th class="w-full text-dark dark:text-light bg-white dark:bg-black" v-on:click="sortBy('name')">
                         {{ lang.manager.table.name }}
                         <template v-if="sortSettings.field === 'name'">
                             <i class="bi bi-sort-down" v-show="sortSettings.direction === 'down'" />
                             <i class="bi bi-sort-up" v-show="sortSettings.direction === 'up'" />
                         </template>
                     </th>
-                    <th class="w-10" v-on:click="sortBy('size')">
+                    <th class="w-fit text-dark dark:text-light bg-white dark:bg-black" v-on:click="sortBy('size')">
                         {{ lang.manager.table.size }}
                         <template v-if="sortSettings.field === 'size'">
                             <i class="bi bi-sort-down" v-show="sortSettings.direction === 'down'" />
                             <i class="bi bi-sort-up" v-show="sortSettings.direction === 'up'" />
                         </template>
                     </th>
-                    <th class="w-10" v-on:click="sortBy('type')">
+                    <th class="w-fit text-dark dark:text-light bg-white dark:bg-black" v-on:click="sortBy('type')">
                         {{ lang.manager.table.type }}
                         <template v-if="sortSettings.field === 'type'">
                             <i class="bi bi-sort-down" v-show="sortSettings.direction === 'down'" />
                             <i class="bi bi-sort-up" v-show="sortSettings.direction === 'up'" />
                         </template>
                     </th>
-                    <th class="w-auto" v-on:click="sortBy('date')">
+                    <th class="w-fit text-dark dark:text-light bg-white dark:bg-black" v-on:click="sortBy('date')">
                         {{ lang.manager.table.date }}
                         <template v-if="sortSettings.field === 'date'">
                             <i class="bi bi-sort-down" v-show="sortSettings.direction === 'down'" />
@@ -34,12 +34,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-if="!isRootPath">
+                <tr v-if="!isRootPath" class="hover:bg-dark/20 dark:hover:bg-light/20">
                     <td colspan="4" class="fm-content-item" v-on:click="levelUp">
                         <i class="bi bi-arrow-90deg-up" />
                     </td>
                 </tr>
                 <tr
+                    class="hover:bg-dark/20 dark:hover:bg-light/20"
                     v-for="(directory, index) in directories"
                     v-bind:key="`d-${index}`"
                     v-bind:class="{ 'table-info': checkSelect('directories', directory.path) }"
@@ -60,6 +61,7 @@
                     </td>
                 </tr>
                 <tr
+                    class="hover:bg-dark/20 dark:hover:bg-light/20"
                     v-for="(file, index) in files"
                     v-bind:key="`f-${index}`"
                     v-bind:class="{ 'table-info': checkSelect('files', file.path) }"
@@ -119,16 +121,11 @@ export default {
 <style lang="scss">
 .fm-table {
     thead th {
-        background: white;
         position: sticky;
         top: 0;
         z-index: 10;
         cursor: pointer;
         border-top: none;
-
-        &:hover {
-            background-color: #f8f9fa;
-        }
 
         & > i {
             padding-left: 0.5rem;
@@ -139,10 +136,6 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    tr:hover {
-        background-color: #f8f9fa;
     }
 
     .w-10 {

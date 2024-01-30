@@ -1,6 +1,6 @@
 <template>
-    <div class="fm-info-block d-flex justify-content-between">
-        <div class="col-auto">
+    <div class="fm-info-block flex justify-between">
+        <div class="flex">
             <span v-show="selectedCount">
                 {{ `${lang.info.selected} ${selectedCount}` }}
                 {{ `${lang.info.selectedSize} ${selectedFilesSize}` }}
@@ -11,7 +11,7 @@
                 {{ `${lang.info.size} ${filesSize}` }}
             </span>
         </div>
-        <div class="col-4">
+        <div class="flex w-1/3">
             <!-- Progress Bar -->
             <div class="progress" v-show="progressBar">
                 <div
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-auto text-right">
+        <div class="flex text-right">
             <div class="spinner-border spinner-border-sm text-info" role="status" v-show="loadingSpinner">
                 <span class="visually-hidden">Loading...</span>
             </div>

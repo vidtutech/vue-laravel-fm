@@ -1,162 +1,132 @@
 <template>
-    <div class="fm-navbar mb-3">
-        <div class="row justify-content-between">
-            <div class="col-auto">
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:disabled="backDisabled"
-                        v-bind:title="lang.btn.back"
-                        v-on:click="historyBack()"
-                    >
-                        <i class="bi bi-skip-backward-fill" />
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:disabled="forwardDisabled"
-                        v-bind:title="lang.btn.forward"
-                        v-on:click="historyForward()"
-                    >
-                        <i class="bi bi-skip-forward-fill" />
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-on:click="refreshAll()"
-                        v-bind:title="lang.btn.refresh"
-                    >
-                        <i class="bi bi-arrow-repeat"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-on:click="showModal('NewFileModal')"
-                        v-bind:title="lang.btn.file"
-                    >
-                        <i class="bi bi-file-earmark"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-on:click="showModal('NewFolderModal')"
-                        v-bind:title="lang.btn.folder"
-                    >
-                        <i class="bi bi-folder"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        disabled
-                        v-if="uploading"
-                        v-bind:title="lang.btn.upload"
-                    >
-                        <i class="bi bi-upload"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-else
-                        v-on:click="showModal('UploadModal')"
-                        v-bind:title="lang.btn.upload"
-                    >
-                        <i class="bi bi-upload"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:disabled="!isAnyItemSelected"
-                        v-on:click="showModal('DeleteModal')"
-                        v-bind:title="lang.btn.delete"
-                    >
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:disabled="!isAnyItemSelected"
-                        v-bind:title="lang.btn.copy"
-                        v-on:click="toClipboard('copy')"
-                    >
-                        <i class="bi bi-files"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:disabled="!isAnyItemSelected"
-                        v-bind:title="lang.btn.cut"
-                        v-on:click="toClipboard('cut')"
-                    >
-                        <i class="bi bi-scissors"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:disabled="!clipboardType"
-                        v-bind:title="lang.btn.paste"
-                        v-on:click="paste"
-                    >
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:title="lang.btn.hidden"
-                        v-on:click="toggleHidden"
-                    >
-                        <i class="bi" v-bind:class="[hiddenFiles ? 'bi-eye-fill' : 'bi-eye-slash-fill']" />
-                    </button>
-                </div>
+    <div class="flex mb-2 w-full">
+        <div class="flex flex-col w-full gap-2 md:flex-row md:justify-between">
+            <div class="flex gap-2 flex-wrap" role="group">
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:disabled="backDisabled"
+                    v-bind:title="lang.btn.back"
+                    v-on:click="historyBack()"
+                >
+                    <i class="bi bi-skip-backward-fill" />
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:disabled="forwardDisabled"
+                    v-bind:title="lang.btn.forward"
+                    v-on:click="historyForward()"
+                >
+                    <i class="bi bi-skip-forward-fill" />
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-on:click="refreshAll()"
+                    v-bind:title="lang.btn.refresh"
+                >
+                    <i class="bi bi-arrow-repeat"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-on:click="showModal('NewFileModal')"
+                    v-bind:title="lang.btn.file"
+                >
+                    <i class="bi bi-file-earmark"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-on:click="showModal('NewFolderModal')"
+                    v-bind:title="lang.btn.folder"
+                >
+                    <i class="bi bi-folder"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    disabled
+                    v-if="uploading"
+                    v-bind:title="lang.btn.upload"
+                >
+                    <i class="bi bi-upload"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-else
+                    v-on:click="showModal('UploadModal')"
+                    v-bind:title="lang.btn.upload"
+                >
+                    <i class="bi bi-upload"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:disabled="!isAnyItemSelected"
+                    v-on:click="showModal('DeleteModal')"
+                    v-bind:title="lang.btn.delete"
+                >
+                    <i class="bi bi-trash"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:disabled="!isAnyItemSelected"
+                    v-bind:title="lang.btn.copy"
+                    v-on:click="toClipboard('copy')"
+                >
+                    <i class="bi bi-files"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:disabled="!isAnyItemSelected"
+                    v-bind:title="lang.btn.cut"
+                    v-on:click="toClipboard('cut')"
+                >
+                    <i class="bi bi-scissors"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:disabled="!clipboardType"
+                    v-bind:title="lang.btn.paste"
+                    v-on:click="paste"
+                >
+                    <i class="bi bi-clipboard"></i>
+                </button>
             </div>
-            <div class="col-auto text-right">
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:class="[viewType === 'table' ? 'active' : '']"
-                        v-on:click="selectView('table')"
-                        v-bind:title="lang.btn.table"
-                    >
-                        <i class="bi bi-view-list"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:class="[viewType === 'grid' ? 'active' : '']"
-                        v-on:click="selectView('grid')"
-                        v-bind:title="lang.btn.grid"
-                    >
-                        <i class="bi bi-grid"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:title="lang.btn.fullScreen"
-                        v-bind:class="{ active: fullScreen }"
-                        v-on:click="screenToggle"
-                    >
-                        <i class="bi bi-arrows-fullscreen"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        v-bind:title="lang.btn.about"
-                        v-on:click="showModal('AboutModal')"
-                    >
-                        <i class="bi bi-question-lg"></i>
-                    </button>
-                </div>
+            <div class="flex gap-2 flex-wrap" role="group">
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:class="[viewType === 'table' ? 'active' : '']"
+                    v-on:click="selectView('table')"
+                    v-bind:title="lang.btn.table"
+                >
+                    <i class="bi bi-view-list"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:class="[viewType === 'grid' ? 'active' : '']"
+                    v-on:click="selectView('grid')"
+                    v-bind:title="lang.btn.grid"
+                >
+                    <i class="bi bi-grid"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    v-bind:title="lang.btn.fullScreen"
+                    v-bind:class="{ active: fullScreen }"
+                    v-on:click="screenToggle"
+                >
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -356,13 +326,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-navbar {
-    flex: 0 0 auto;
-
-    .col-auto > .btn-group:not(:last-child) {
-        margin-right: 0.4rem;
-    }
-}
-</style>

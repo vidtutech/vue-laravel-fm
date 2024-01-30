@@ -3,9 +3,9 @@
         <ul class="list-inline">
             <li class="list-inline-item" v-for="(disk, index) in disks" v-bind:key="index">
                 <span
-                    class="badge"
+                    class="badge text-dark dark:text-light font-bold gap-1"
                     v-on:click="selectDisk(disk)"
-                    v-bind:class="[disk === selectedDisk ? 'bg-secondary' : 'bg-light text-dark']"
+                    v-bind:class="[disk === selectedDisk ? 'bg-dark/10 dark:bg-light/10' : 'bg-dark/5 dark:bg-light/5']"
                 >
                     <i class="bi bi-hdd"></i> {{ disk }}
                 </span>

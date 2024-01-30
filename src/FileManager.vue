@@ -1,27 +1,30 @@
 <template>
-    <div class="fm d-flex flex-column" v-bind:class="{ 'fm-full-screen': fullScreen }">
+    <div
+        class="relative flex flex-col p-1 size-full bg-light dark:bg-dark text-dark dark:text-light"
+        v-bind:class="{ 'size-full pb-0': fullScreen }"
+    >
         <navbar-block />
-        <div class="fm-body d-flex">
+        <div class="relative flex size-full py-2 overflow-hidden border-y border-dark dark:border-light">
             <notification-block />
             <context-menu />
             <modal-block v-if="showModal" />
             <template v-if="windowsConfig === 1">
-                <left-manager class="col" manager="left" />
+                <left-manager class="flex" manager="left" />
             </template>
             <template v-else-if="windowsConfig === 2">
-                <folder-tree class="col-4 col-md-3" />
-                <left-manager class="col-8 col-md-9" manager="left" />
+                <folder-tree class="w-1/3 md:w-1/4" />
+                <left-manager class="w-2/3 md:w-3/4" manager="left" />
             </template>
             <template v-else-if="windowsConfig === 3">
                 <left-manager
-                    class="col-12 col-sm-6"
+                    class="w-full sm:w-1/2"
                     manager="left"
                     v-on:click.native="selectManager('left')"
                     v-on:contextmenu.native="selectManager('left')"
                 >
                 </left-manager>
                 <right-manager
-                    class="col-12 col-sm-6"
+                    class="w-full sm:w-1/2"
                     manager="right"
                     v-on:click.native="selectManager('right')"
                     v-on:contextmenu.native="selectManager('right')"
@@ -241,37 +244,8 @@ export default {
 </script>
 
 <style lang="scss">
-.fm {
-    position: relative;
-    height: 100%;
-    padding: 1rem;
-    background-color: white;
-
-    &:-moz-full-screen {
-        background-color: white;
-    }
-
-    &:-webkit-full-screen {
-        background-color: white;
-    }
-
-    &:fullscreen {
-        background-color: white;
-    }
-
-    .fm-body {
-        flex: 1 1 auto;
-        overflow: hidden;
-        position: relative;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        border-top: 1px solid #6c757d;
-        border-bottom: 1px solid #6c757d;
-    }
-
-    .unselectable {
-        user-select: none;
-    }
+.unselectable {
+    user-select: none;
 }
 
 .fm-error {
@@ -302,11 +276,5 @@ export default {
     color: #0dcaf0;
     background-color: white;
     border-color: #0dcaf0;
-}
-
-.fm.fm-full-screen {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 0;
 }
 </style>
