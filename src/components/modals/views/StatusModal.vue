@@ -14,7 +14,7 @@
                 <span>{{ lang.modal.status.noErrors }}</span>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="fm-modal-footer">
             <button type="button" class="btn btn-danger" v-bind:disabled="!errors.length" v-on:click="clearErrors">
                 {{ lang.btn.clear }}
             </button>

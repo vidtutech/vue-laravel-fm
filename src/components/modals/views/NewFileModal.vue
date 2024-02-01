@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="fm-modal-footer">
             <button type="button" class="btn btn-info" v-bind:disabled="!submitActive" v-on:click="addFile">
                 {{ lang.btn.submit }}
             </button>

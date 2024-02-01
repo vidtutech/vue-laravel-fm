@@ -16,7 +16,7 @@
                 v-on:change="onChange"
             />
         </div>
-        <div class="modal-footer">
+        <div class="fm-modal-footer">
             <button type="button" class="btn btn-info" v-on:click="updateFile">
                 {{ lang.btn.submit }}
             </button>

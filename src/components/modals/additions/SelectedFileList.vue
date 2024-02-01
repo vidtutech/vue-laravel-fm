@@ -1,13 +1,19 @@
 <template>
     <div class="fm-additions-file-list">
-        <div class="d-flex justify-content-between" v-for="(item, index) in selectedItems" v-bind:key="index">
-            <div class="w-75 text-truncate">
-                <span v-if="item.type === 'dir'"> <i class="bi bi-folder" />{{ item.basename }} </span>
+        <div
+            class="flex justify-between p-2 hover:bg-dark/10 hover:dark:bg-light/10 rounded"
+            v-for="(item, index) in selectedItems"
+            v-bind:key="index"
+        >
+            <div class="w-full truncate">
+                <span v-if="item.type === 'dir'" class="flex gap-2">
+                    <i class="bi bi-folder" />{{ item.basename }}
+                </span>
                 <span v-else>
                     <i class="bi" v-bind:class="extensionToIcon(item.extension)" /> {{ item.basename }}
                 </span>
             </div>
-            <div class="text-end" v-if="item.type === 'file'">
+            <div class="text-center min-w-fit" v-if="item.type === 'file'">
                 {{ bytesToHuman(item.size) }}
             </div>
         </div>
@@ -31,11 +37,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-additions-file-list {
-    .bi {
-        padding-right: 0.5rem;
-    }
-}
-</style>

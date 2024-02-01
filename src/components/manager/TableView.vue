@@ -50,13 +50,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-if="!isRootPath" class="hover:bg-dark/20 dark:hover:bg-light/20">
+                <tr v-if="!isRootPath">
                     <td colspan="4" class="fm-content-item max-w-[1px]" v-on:click="levelUp">
                         <i class="bi bi-arrow-90deg-up" />
                     </td>
                 </tr>
                 <tr
-                    class="hover:bg-dark/20 dark:hover:bg-light/20"
                     v-for="(directory, index) in directories"
                     v-bind:key="`d-${index}`"
                     v-bind:class="{ 'table-info': checkSelect('directories', directory.path) }"

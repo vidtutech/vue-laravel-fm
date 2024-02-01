@@ -52,7 +52,7 @@
             </div>
             <span v-else class="text-danger">{{ lang.modal.unzip.warning }}</span>
         </div>
-        <div class="modal-footer">
+        <div class="fm-modal-footer">
             <button type="button" class="btn btn-info" v-bind:disabled="!submitActive" v-on:click="unpackArchive">
                 {{ lang.btn.submit }}
             </button>

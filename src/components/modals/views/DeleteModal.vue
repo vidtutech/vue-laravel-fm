@@ -12,9 +12,21 @@
                 <span class="text-danger">{{ lang.modal.delete.noSelected }}</span>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" v-on:click="deleteItems">{{ lang.modal.delete.title }}</button>
-            <button type="button" class="btn btn-light" v-on:click="hideModal">{{ lang.btn.cancel }}</button>
+        <div class="fm-modal-footer">
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-vidtu-red/80 px-3 py-2 text-lg font-semibold text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white"
+                v-on:click="deleteItems"
+            >
+                {{ lang.modal.delete.title }}
+            </button>
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-bold text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
+                v-on:click="hideModal"
+            >
+                {{ lang.btn.cancel }}
+            </button>
         </div>
     </div>
 </template>

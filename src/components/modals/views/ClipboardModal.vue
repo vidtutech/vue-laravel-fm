@@ -55,7 +55,7 @@
                 <span>{{ lang.clipboard.none }}</span>
             </template>
         </div>
-        <div class="modal-footer">
+        <div class="fm-modal-footer">
             <button type="button" class="btn btn-danger" v-bind:disabled="!clipboard.type" v-on:click="resetClipboard">
                 {{ lang.btn.clear }}
             </button>

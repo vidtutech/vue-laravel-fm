@@ -7,7 +7,11 @@
         class="fm-context-menu bg-light dark:bg-dark shadow-sm shadow-dark/50 dark:shadow-light/50 rounded-2xl overflow-hidden"
         tabindex="-1"
     >
-        <ul v-for="(group, index) in menu" v-bind:key="`g-${index}`" class="list-unstyled text-dark dark:text-light">
+        <ul
+            v-for="(group, index) in menu"
+            v-bind:key="`g-${index}`"
+            class="list-unstyled text-dark dark:text-light border-b border-dark/50 dark:border-light/50"
+        >
             <template v-for="(item, index) in group">
                 <li
                     class="hover:bg-dark/20 dark:hover:bg-light/20 flex gap-4 w-full p-2 px-4"

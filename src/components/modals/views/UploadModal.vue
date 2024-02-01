@@ -85,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="fm-modal-footer">
             <button
                 type="button"
                 class="btn"
