@@ -1,10 +1,10 @@
 <template>
-    <div class="modal-content fm-modal-upload">
-        <div class="modal-header">
-            <h5 class="modal-title">{{ lang.modal.upload.title }}</h5>
+    <div class="fm-modal-content fm-modal-upload">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">{{ lang.modal.upload.title }}</h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body">
+        <div class="fm-modal-body">
             <div class="fm-btn-wrapper" v-show="!progressBar">
                 <button type="button" class="btn btn-secondary btn-block">
                     {{ lang.btn.uploadSelect }}

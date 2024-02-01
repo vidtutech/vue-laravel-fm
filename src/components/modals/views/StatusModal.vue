@@ -1,10 +1,10 @@
 <template>
-    <div class="modal-content fm-modal-errors">
-        <div class="modal-header">
-            <h5 class="modal-title">{{ lang.modal.status.title }}</h5>
+    <div class="fm-modal-content fm-modal-errors">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">{{ lang.modal.status.title }}</h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body">
+        <div class="fm-modal-body">
             <div v-if="errors.length">
                 <ul class="list-unstyled">
                     <li v-for="(item, index) in errors" v-bind:key="index">{{ item.status }} - {{ item.message }}</li>

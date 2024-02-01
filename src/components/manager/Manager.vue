@@ -1,8 +1,10 @@
 <template>
-    <div class="flex flex-col size-full">
-        <disk-list v-bind:manager="manager" />
-        <bread-crumb v-bind:manager="manager" />
-        <div class="overflow-auto">
+    <div class="flex flex-col size-full gap-2">
+        <div class="flex flex-row gap-2 w-full items-center">
+            <!-- <disk-list v-bind:manager="manager" /> -->
+            <bread-crumb v-bind:manager="manager" />
+        </div>
+        <div class="size-full overflow-auto">
             <table-view v-if="viewType === 'table'" v-bind:manager="manager" />
             <grid-view v-else v-bind:manager="manager" />
         </div>

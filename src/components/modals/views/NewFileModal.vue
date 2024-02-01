@@ -1,10 +1,10 @@
 <template>
-    <div class="modal-content fm-modal-folder">
-        <div class="modal-header">
-            <h5 class="modal-title">{{ lang.modal.newFile.title }}</h5>
+    <div class="fm-modal-content fm-modal-folder">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">{{ lang.modal.newFile.title }}</h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body">
+        <div class="fm-modal-body">
             <div class="form-group">
                 <label for="fm-file-name">{{ lang.modal.newFile.fieldName }}</label>
                 <input

@@ -1,14 +1,23 @@
 <template>
-    <div class="modal-content fm-modal-properties">
-        <div class="modal-header">
-            <h5 class="modal-title">{{ lang.modal.properties.title }}</h5>
-            <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
+    <div class="fm-modal-content">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">{{ lang.modal.properties.title }}</h5>
+            <button
+                type="button"
+                class="ml-auto flex rounded-full bg-dark/10 hover:bg-dark/20 px-4 py-3 dark:bg-light/10 dark:hover:bg-light/20 text-dark dark:text-light"
+                aria-label="Close"
+                v-on:click="hideModal"
+            >
+                <i class="bi bi-x-lg" />
+            </button>
         </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-2">{{ lang.modal.properties.disk }}:</div>
-                <div class="col-9">{{ selectedDisk }}</div>
-                <div class="col-1 text-right">
+        <div class="fm-modal-body">
+            <div
+                class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+            >
+                <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.disk }}:</div>
+                <div class="w-full break-words">{{ selectedDisk }}</div>
+                <div class="px-3 text-right cursor-pointer hover:scale-110 transition-all ease-in-out">
                     <i
                         v-on:click="copyToClipboard(selectedDisk)"
                         v-bind:title="lang.clipboard.copy"
@@ -16,10 +25,12 @@
                     />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-2">{{ lang.modal.properties.name }}:</div>
-                <div class="col-9">{{ selectedItem.basename }}</div>
-                <div class="col-1 text-right">
+            <div
+                class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+            >
+                <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.name }}:</div>
+                <div class="w-full break-words">{{ selectedItem.basename }}</div>
+                <div class="px-3 text-right cursor-pointer hover:scale-110 transition-all ease-in-out">
                     <i
                         v-on:click="copyToClipboard(selectedItem.basename)"
                         v-bind:title="lang.clipboard.copy"
@@ -27,10 +38,12 @@
                     />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-2">{{ lang.modal.properties.path }}:</div>
-                <div class="col-9">{{ selectedItem.path }}</div>
-                <div class="col-1 text-right">
+            <div
+                class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+            >
+                <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.path }}:</div>
+                <div class="w-full break-words">{{ selectedItem.path }}</div>
+                <div class="px-3 text-right cursor-pointer hover:scale-110 transition-all ease-in-out">
                     <i
                         v-on:click="copyToClipboard(selectedItem.path)"
                         v-bind:title="lang.clipboard.copy"
@@ -39,10 +52,12 @@
                 </div>
             </div>
             <template v-if="selectedItem.type === 'file'">
-                <div class="row">
-                    <div class="col-2">{{ lang.modal.properties.size }}:</div>
-                    <div class="col-9">{{ bytesToHuman(selectedItem.size) }}</div>
-                    <div class="col-1 text-right">
+                <div
+                    class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+                >
+                    <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.size }}:</div>
+                    <div class="w-full break-words">{{ bytesToHuman(selectedItem.size) }}</div>
+                    <div class="px-3 text-right cursor-pointer hover:scale-110 transition-all ease-in-out">
                         <i
                             v-on:click="copyToClipboard(bytesToHuman(selectedItem.size))"
                             v-bind:title="lang.clipboard.copy"
@@ -50,26 +65,36 @@
                         />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-2">{{ lang.modal.properties.url }}:</div>
-                    <div class="col-9">
+                <div
+                    class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+                >
+                    <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.url }}:</div>
+                    <div class="w-full break-words">
                         <span v-if="url">{{ url }}</span>
                         <span v-else>
-                            <button v-on:click="getUrl" type="button" class="btn btn-sm btn-light">
-                                <i class="bi bi-link-45deg" /> Get URL
+                            <button
+                                v-on:click="getUrl"
+                                type="button"
+                                title="Get URL"
+                                class="flex items-center justify-center gap-2 rounded-full bg-dark/10 dark:bg-light/10 p-2 px-4 hover:bg-dark/25 dark:hover:bg-light/25"
+                            >
+                                <i class="bi bi-link-45deg" />
+                                <span class="font-bold">Get URL</span>
                             </button>
                         </span>
                     </div>
-                    <div v-if="url" class="col-1 text-right">
+                    <div v-if="url" class="px-3 text-right cursor-pointer hover:scale-110 transition-all ease-in-out">
                         <i v-on:click="copyToClipboard(url)" v-bind:title="lang.clipboard.copy" class="bi bi-files" />
                     </div>
                 </div>
             </template>
             <template v-if="selectedItem.hasOwnProperty('timestamp')">
-                <div class="row">
-                    <div class="col-2">{{ lang.modal.properties.modified }}:</div>
-                    <div class="col-9">{{ timestampToDate(selectedItem.timestamp) }}</div>
-                    <div class="col-1 text-right">
+                <div
+                    class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+                >
+                    <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.modified }}:</div>
+                    <div class="w-full break-words">{{ timestampToDate(selectedItem.timestamp) }}</div>
+                    <div class="px-3 text-right cursor-pointer hover:scale-110 transition-all ease-in-out">
                         <i
                             v-on:click="copyToClipboard(timestampToDate(selectedItem.timestamp))"
                             v-bind:title="lang.clipboard.copy"
@@ -79,9 +104,11 @@
                 </div>
             </template>
             <template v-if="selectedItem.hasOwnProperty('acl')">
-                <div class="row">
-                    <div class="col-2">{{ lang.modal.properties.access }}:</div>
-                    <div class="col-9">{{ lang.modal.properties['access_' + selectedItem.acl] }}</div>
+                <div
+                    class="flex flex-row gap-3 justify-between items-center hover:bg-dark/10 hover:dark:bg-light/10 p-3 rounded-xl"
+                >
+                    <div class="font-bold w-full max-w-[20%]">{{ lang.modal.properties.access }}:</div>
+                    <div class="w-full break-words">{{ lang.modal.properties['access_' + selectedItem.acl] }}</div>
                 </div>
             </template>
         </div>
@@ -140,56 +167,21 @@ export default {
          * Copy text to clipboard
          * @param text
          */
-        copyToClipboard(text) {
-            // create input
-            const copyInputHelper = document.createElement('input');
-            copyInputHelper.className = 'copyInputHelper';
-            document.body.appendChild(copyInputHelper);
-            // add text
-            copyInputHelper.value = text;
-            copyInputHelper.select();
-            // copy text to clipboard
-            document.execCommand('copy');
-            // clear
-            document.body.removeChild(copyInputHelper);
-
-            // Notification
-            EventBus.emit('addNotification', {
-                status: 'success',
-                message: this.lang.notifications.copyToClipboard,
-            });
+        async copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                EventBus.emit('addNotification', {
+                    status: 'success',
+                    message: this.lang.notifications.copyToClipboard,
+                });
+            } catch (error) {
+                console.warn('File Manager failed to copy', error);
+                EventBus.emit('addNotification', {
+                    status: 'error',
+                    message: this.lang.notifications.copyFailed,
+                });
+            }
         },
     },
 };
 </script>
-
-<style lang="scss">
-.fm-modal-properties .modal-body {
-    .row {
-        margin-bottom: 0.3rem;
-        padding-top: 0.3rem;
-        padding-bottom: 0.3rem;
-
-        .bi-files {
-            display: none;
-            cursor: pointer;
-        }
-
-        &:hover {
-            background-color: #f8f9fa;
-
-            & .bi-files {
-                display: block;
-            }
-        }
-    }
-
-    .col-2 {
-        font-weight: bold;
-    }
-
-    .col-9 {
-        word-wrap: break-word;
-    }
-}
-</style>

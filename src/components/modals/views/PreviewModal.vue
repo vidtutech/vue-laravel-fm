@@ -1,13 +1,13 @@
 <template>
-    <div class="modal-content fm-modal-preview">
-        <div class="modal-header">
-            <h5 class="modal-title w-75 text-truncate">
+    <div class="fm-modal-content fm-modal-preview">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">
                 {{ showCropperModule ? lang.modal.cropper.title : lang.modal.preview.title }}
                 <small class="text-muted pl-3">{{ selectedItem.basename }}</small>
             </h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body text-center">
+        <div class="fm-modal-body text-center">
             <template v-if="showCropperModule">
                 <cropper-module v-bind:imgSrc="imgSrc" v-bind:maxHeight="maxHeight" v-on:closeCropper="closeCropper" />
             </template>
@@ -148,9 +148,7 @@ export default {
 
 <style lang="scss">
 .fm-modal-preview {
-    .modal-body {
-        padding: 0;
-
+    .fm-modal-body {
         img {
             max-width: 100%;
         }

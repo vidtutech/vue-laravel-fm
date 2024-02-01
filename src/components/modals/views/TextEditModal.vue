@@ -1,13 +1,13 @@
 <template>
-    <div class="modal-content fm-modal-text-edit">
-        <div class="modal-header">
-            <h5 class="modal-title w-75 text-truncate">
+    <div class="fm-modal-content fm-modal-text-edit">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">
                 {{ lang.modal.editor.title }}
                 <small class="text-muted pl-3">{{ selectedItem.basename }}</small>
             </h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body">
+        <div class="fm-modal-body">
             <codemirror
                 ref="fmCodeEditor"
                 v-bind:value="code"
@@ -152,10 +152,4 @@ export default {
 
 <style lang="scss">
 @import 'codemirror/theme/blackboard.css';
-
-.fm-modal-text-edit {
-    .modal-body {
-        padding: 0;
-    }
-}
 </style>

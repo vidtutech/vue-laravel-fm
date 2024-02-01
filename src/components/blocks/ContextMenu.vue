@@ -65,14 +65,16 @@ export default {
          * @param event
          */
         showMenu(event) {
+            console.log(event, this.$refs);
             if (this.selectedItems) {
                 this.menuVisible = true;
 
                 // focus on menu
                 this.$nextTick(() => {
-                    this.$refs.contextMenu.focus();
-                    // set menu params
-                    this.setMenu(event.pageY, event.pageX);
+                    if (this.$refs.contextMenu) {
+                        this.$refs.contextMenu.focus();
+                        this.setMenu(event.pageY, event.pageX);
+                    }
                 });
             }
         },

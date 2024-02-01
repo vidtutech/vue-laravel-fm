@@ -1,5 +1,5 @@
 <template>
-    <div class="flex mb-2 w-full">
+    <div class="fm-navbar">
         <div class="flex flex-col w-full gap-2 md:flex-row md:justify-between">
             <div class="flex gap-2 flex-wrap" role="group">
                 <button

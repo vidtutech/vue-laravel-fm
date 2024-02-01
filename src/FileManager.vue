@@ -9,7 +9,7 @@
             <context-menu />
             <modal-block v-if="showModal" />
             <template v-if="windowsConfig === 1">
-                <left-manager class="flex" manager="left" />
+                <left-manager manager="left" />
             </template>
             <template v-else-if="windowsConfig === 2">
                 <folder-tree class="w-1/3 md:w-1/4" />

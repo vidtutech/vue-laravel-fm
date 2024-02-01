@@ -1,12 +1,12 @@
 <template>
-    <div class="modal-content fm-modal-video-player">
-        <div class="modal-header">
-            <h5 class="modal-title w-75 text-truncate">
+    <div class="fm-modal-content fm-modal-video-player">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">
                 {{ lang.modal.videoPlayer.title }} <small class="text-muted ps-3">{{ videoFile.basename }}</small>
             </h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body">
+        <div class="fm-modal-body">
             <video ref="fmVideo" controls />
         </div>
     </div>

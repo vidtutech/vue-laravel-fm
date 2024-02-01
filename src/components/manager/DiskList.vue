@@ -3,7 +3,8 @@
         <ul class="list-inline">
             <li class="list-inline-item" v-for="(disk, index) in disks" v-bind:key="index">
                 <span
-                    class="badge text-dark dark:text-light font-bold gap-1"
+                    title="`${ disk }`"
+                    class="badge text-dark dark:text-light font-bold gap-1 cursor-pointer"
                     v-on:click="selectDisk(disk)"
                     v-bind:class="[disk === selectedDisk ? 'bg-dark/10 dark:bg-light/10' : 'bg-dark/5 dark:bg-light/5']"
                 >
@@ -54,15 +55,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-disk-list {
-    ul.list-inline {
-        margin-bottom: 0.5rem;
-    }
-
-    .badge.bg-light {
-        cursor: pointer;
-    }
-}
-</style>

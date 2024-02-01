@@ -1,10 +1,10 @@
 <template>
-    <div class="modal-content fm-modal-zip">
-        <div class="modal-header">
-            <h5 class="modal-title">{{ lang.modal.zip.title }}</h5>
+    <div class="fm-modal-content fm-modal-zip">
+        <div class="fm-modal-header">
+            <h5 class="fm-modal-title">{{ lang.modal.zip.title }}</h5>
             <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
         </div>
-        <div class="modal-body">
+        <div class="fm-modal-body">
             <label for="fm-zip-name">{{ lang.modal.zip.fieldName }}</label>
             <div class="input-group mb-3">
                 <input

@@ -1,33 +1,26 @@
 <template>
-    <div class="fm-breadcrumb">
-        <nav aria-label="breadcrumb">
-            <ol
-                class="breadcrumb text-light dark:text-dark flex gap-1 rounded-full"
-                v-bind:class="[
-                    manager === activeManager ? 'bg-dark/20 dark:bg-light/20' : 'bg-dark/10 dark:bg-light/10',
-                ]"
+    <nav aria-label="breadcrumb" class="fm-breadcrumb">
+        <ol
+            class="breadcrumb"
+            v-bind:class="[manager === activeManager ? 'bg-dark/20 dark:bg-light/20' : 'bg-dark/10 dark:bg-light/10']"
+        >
+            <li class="breadcrumb-item" v-on:click="selectMainDirectory">
+                <span class="badge bg-dark/10 dark:bg-light/10 text-dark dark:text-light">
+                    <i class="bi bi-hdd"></i>
+                </span>
+            </li>
+            <li
+                class="breadcrumb-item"
+                v-for="(item, index) in breadcrumb"
+                v-bind:key="index"
+                v-bind:class="[breadcrumb.length === index + 1 ? 'font-semibold' : '']"
+                v-on:click="selectDirectory(index)"
             >
-                <li
-                    class="breadcrumb-item text-truncate text-dark dark:text-light hover:underline"
-                    v-on:click="selectMainDirectory"
-                >
-                    <span class="badge bg-dark/10 dark:bg-light/10 text-dark dark:text-light">
-                        <i class="bi bi-hdd"></i>
-                    </span>
-                </li>
-                <li
-                    class="breadcrumb-item text-truncate text-dark dark:text-light hover:underline flex gap-1"
-                    v-for="(item, index) in breadcrumb"
-                    v-bind:key="index"
-                    v-bind:class="[breadcrumb.length === index + 1 ? 'font-semibold' : '']"
-                    v-on:click="selectDirectory(index)"
-                >
-                    <span class="font-light">/</span>
-                    <span>{{ item }}</span>
-                </li>
-            </ol>
-        </nav>
-    </div>
+                <span class="font-light">/</span>
+                <span>{{ item }}</span>
+            </li>
+        </ol>
+    </nav>
 </template>
 
 <script>
@@ -99,10 +92,6 @@ export default {
 <style lang="scss">
 .fm-breadcrumb {
     .breadcrumb {
-        flex-wrap: nowrap;
-        padding: 0.2rem 0.3rem;
-        margin-bottom: 0.5rem;
-
         .breadcrumb-item:not(.active):hover {
             cursor: pointer;
             font-weight: normal;

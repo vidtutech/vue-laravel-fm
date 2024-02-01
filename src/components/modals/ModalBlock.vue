@@ -1,7 +1,7 @@
 <template>
     <transition name="fm-modal">
-        <div class="fm-modal bg-white dark:bg-black rounded-xl modal" ref="fmModal" v-on:click="hideModal">
-            <div class="modal-dialog" role="document" v-bind:class="modalSize" v-on:click.stop>
+        <div class="fm-modal" ref="fmModal" v-on:click="hideModal">
+            <div class="fm-modal-dialog" role="document" v-bind:class="modalSize" v-on:click.stop>
                 <component v-bind:is="modalName" />
             </div>
         </div>
@@ -78,19 +78,6 @@ export default {
 
 <style lang="scss">
 .fm-modal {
-    position: absolute;
-    z-index: 9998;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-
-    display: block;
-    transition: opacity 0.4s ease;
-    overflow: auto;
-
     .modal-xl {
         max-width: 96%;
     }

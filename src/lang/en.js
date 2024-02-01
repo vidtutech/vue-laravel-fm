@@ -157,6 +157,7 @@ const en = {
     notifications: {
         cutToClipboard: 'Cut to clipboard!',
         copyToClipboard: 'Copied to clipboard!',
+        copyFailed: 'Failed to copy! Please check clipboard permissions!',
     },
     response: {
         noConfig: 'Config not found!',
