@@ -35,8 +35,9 @@ export default {
          * Show new notification
          * @param status
          * @param message
+         * @param timeout
          */
-        addNotification(status, message) {
+        addNotification(status, message, timeout = 3000) {
             this.notifications.push({
                 status,
                 message,
@@ -44,7 +45,7 @@ export default {
             // timeout for closing
             setTimeout(() => {
                 this.notifications.shift();
-            }, 3000);
+            }, timeout);
         },
     },
 };

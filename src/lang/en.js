@@ -181,6 +181,10 @@ const en = {
         deleted: 'Deleted!',
         renamed: 'Renamed!',
         copied: 'Copied successfully!',
+        // preview in room - vidtu
+        previewLoading: 'Loading File Preview',
+        previewLoaded: 'File Preview loaded',
+        previewFailed: 'Failed to load File Preview',
         // zip
         zipError: 'Error creating archive!',
         // acl

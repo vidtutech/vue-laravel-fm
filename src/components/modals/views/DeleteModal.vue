@@ -1,8 +1,15 @@
 <template>
-    <div class="fm-modal-content fm-modal-delete">
+    <div class="fm-modal-content">
         <div class="fm-modal-header">
             <h5 class="fm-modal-title">{{ lang.modal.delete.title }}</h5>
-            <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
+            <button
+                type="button"
+                class="ml-auto flex rounded-full bg-dark/10 hover:bg-dark/20 px-4 py-3 dark:bg-light/10 dark:hover:bg-light/20 text-dark dark:text-light"
+                aria-label="Close"
+                v-on:click="hideModal"
+            >
+                <i class="bi bi-x-lg" />
+            </button>
         </div>
         <div class="fm-modal-body">
             <div v-if="selectedItems.length">
@@ -22,7 +29,7 @@
             </button>
             <button
                 type="button"
-                class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-bold text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
+                class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-bold items-center text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
                 v-on:click="hideModal"
             >
                 {{ lang.btn.cancel }}

@@ -15,7 +15,7 @@
             <template v-for="(item, index) in group">
                 <li
                     class="hover:bg-dark/20 dark:hover:bg-light/20 flex gap-4 w-full p-2 px-4"
-                    title="`${lang.contextMenu[item.name]}`"
+                    :title="lang.contextMenu[item.name]"
                     v-if="showMenuItem(item.name)"
                     v-on:click="menuAction(item.name)"
                     v-bind:key="`i-${index}`"

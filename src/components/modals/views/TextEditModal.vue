@@ -1,26 +1,44 @@
 <template>
-    <div class="fm-modal-content fm-modal-text-edit">
+    <div class="fm-modal-content">
         <div class="fm-modal-header">
-            <h5 class="fm-modal-title">
-                {{ lang.modal.editor.title }}
-                <small class="text-muted pl-3">{{ selectedItem.basename }}</small>
-            </h5>
-            <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
+            <h5 class="fm-modal-title">{{ lang.modal.editor.title }}</h5>
+            <button
+                type="button"
+                class="ml-auto flex rounded-full bg-dark/10 hover:bg-dark/20 px-4 py-3 dark:bg-light/10 dark:hover:bg-light/20 text-dark dark:text-light"
+                aria-label="Close"
+                v-on:click="hideModal"
+            >
+                <i class="bi bi-x-lg" />
+            </button>
         </div>
         <div class="fm-modal-body">
-            <codemirror
-                ref="fmCodeEditor"
-                v-bind:value="code"
-                v-bind:options="cmOptions"
-                v-bind:height="editorHeight"
-                v-on:change="onChange"
-            />
+            <div class="flex flex-row gap-2 w-full items-center">
+                <p class="min-w-fit">Editing File:</p>
+                <small class="w-full max-w-[85%] truncate font-semibold text-lg">{{ selectedItem.basename }}</small>
+            </div>
+            <div class="flex size-full overflow-hidden border border-dark rounded-2xl dark:border-light">
+                <codemirror
+                    ref="fmCodeEditor"
+                    v-bind:value="code"
+                    v-bind:options="cmOptions"
+                    v-bind:height="editorHeight"
+                    v-on:change="onChange"
+                />
+            </div>
         </div>
         <div class="fm-modal-footer">
-            <button type="button" class="btn btn-info" v-on:click="updateFile">
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-green-400/80 px-3 py-2 text-lg font-semibold items-center text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white disabled:opacity-50 disabled:hover:scale-100"
+                v-on:click="updateFile"
+            >
                 {{ lang.btn.submit }}
             </button>
-            <button type="button" class="btn btn-light" v-on:click="hideModal">
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-bold items-center text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
+                v-on:click="hideModal"
+            >
                 {{ lang.btn.cancel }}
             </button>
         </div>
@@ -149,7 +167,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-@import 'codemirror/theme/blackboard.css';
-</style>

@@ -50,7 +50,12 @@ export default {
             // extension not found
             if (!extension) return false;
 
-            return this.$store.state.fm.settings.imageExtensions.includes(extension.toLowerCase());
+            return [
+                ...this.$store.state.fm.settings.imageExtensions,
+                ...this.$store.state.fm.settings.videoExtensions,
+                ...this.$store.state.fm.settings.audioExtensions,
+                ...this.$store.state.fm.settings.docExtensions,
+            ].includes(extension.toLowerCase());
         },
 
         /**

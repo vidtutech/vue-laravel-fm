@@ -21,6 +21,7 @@ import TextEditModal from './views/TextEditModal.vue';
 import AudioPlayerModal from './views/AudioPlayerModal.vue';
 import VideoPlayerModal from './views/VideoPlayerModal.vue';
 import ZipModal from './views/ZipModal.vue';
+import PreviewModal from './views/PreviewModal.vue';
 import UnzipModal from './views/UnzipModal.vue';
 
 export default {
@@ -39,6 +40,7 @@ export default {
         VideoPlayerModal,
         ZipModal,
         UnzipModal,
+        PreviewModal,
     },
     mounted() {
         // set height

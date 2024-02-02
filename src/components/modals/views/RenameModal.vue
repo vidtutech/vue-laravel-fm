@@ -1,22 +1,29 @@
 <template>
-    <div class="fm-modal-content fm-modal-rename">
+    <div class="fm-modal-content">
         <div class="fm-modal-header">
             <h5 class="fm-modal-title">{{ lang.modal.rename.title }}</h5>
-            <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
+            <button
+                type="button"
+                class="ml-auto flex rounded-full bg-dark/10 hover:bg-dark/20 px-4 py-3 dark:bg-light/10 dark:hover:bg-light/20 text-dark dark:text-light"
+                aria-label="Close"
+                v-on:click="hideModal"
+            >
+                <i class="bi bi-x-lg" />
+            </button>
         </div>
         <div class="fm-modal-body">
-            <div class="form-group">
+            <div class="flex flex-col gap-3 justify-between p-3 rounded-xl">
                 <label for="fm-input-rename">{{ lang.modal.rename.fieldName }}</label>
                 <input
                     type="text"
-                    class="form-control"
+                    class="w-full rounded-lg bg-dark/5 dark:bg-light/5 text-dark dark:text-light"
                     id="fm-input-rename"
                     v-focus
-                    v-bind:class="{ 'is-invalid': checkName }"
+                    v-bind:class="{ 'border-vidtu-red': checkName }"
                     v-model="name"
                     v-on:keyup="validateName"
                 />
-                <div class="invalid-feedback" v-show="checkName">
+                <div class="invalid-feedback text-vidtu-red font-semibold" v-show="checkName">
                     {{ lang.modal.rename.fieldFeedback }}
                     {{ directoryExist ? ` - ${lang.modal.rename.directoryExist}` : '' }}
                     {{ fileExist ? ` - ${lang.modal.rename.fileExist}` : '' }}
@@ -24,10 +31,21 @@
             </div>
         </div>
         <div class="fm-modal-footer">
-            <button type="button" class="btn btn-info" v-bind:disabled="submitDisable" v-on:click="rename">
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-green-400/80 px-3 py-2 text-lg font-semibold items-center text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white disabled:opacity-50 disabled:hover:scale-100"
+                v-bind:disabled="submitDisable"
+                v-on:click="rename"
+            >
                 {{ lang.btn.submit }}
             </button>
-            <button type="button" class="btn btn-light" v-on:click="hideModal">{{ lang.btn.cancel }}</button>
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-semibold items-center text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
+                v-on:click="hideModal"
+            >
+                {{ lang.btn.cancel }}
+            </button>
         </div>
     </div>
 </template>

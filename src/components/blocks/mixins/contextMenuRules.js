@@ -12,24 +12,24 @@ export default {
             return !this.multiSelect && this.firstItemType === 'dir';
         },
 
-        /**
-         * Play audio - menu item status - show or hide
-         * @returns {boolean}
-         */
-        audioPlayRule() {
-            return (
-                this.selectedItems.every((elem) => elem.type === 'file') &&
-                this.selectedItems.every((elem) => this.canAudioPlay(elem.extension))
-            );
-        },
+        // /**
+        //  * Play audio - menu item status - show or hide
+        //  * @returns {boolean}
+        //  */
+        // audioPlayRule() {
+        //     return (
+        //         this.selectedItems.every((elem) => elem.type === 'file') &&
+        //         this.selectedItems.every((elem) => this.canAudioPlay(elem.extension))
+        //     );
+        // },
 
-        /**
-         * Play video - menu item status - show or hide
-         * @returns {boolean}
-         */
-        videoPlayRule() {
-            return !this.multiSelect && this.canVideoPlay(this.selectedItems[0].extension);
-        },
+        // /**
+        //  * Play video - menu item status - show or hide
+        //  * @returns {boolean}
+        //  */
+        // videoPlayRule() {
+        //     return !this.multiSelect && this.canVideoPlay(this.selectedItems[0].extension);
+        // },
 
         /**
          * View - menu item status - show or hide
