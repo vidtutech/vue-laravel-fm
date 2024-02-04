@@ -137,7 +137,7 @@ export default {
                     });
                 })
                 .catch((error) => {
-                    console.error('Failed to load preview', error);
+                    console.warn('Failed to load preview', error);
                     this.previewFailed = true;
                     EventBus.emit('addNotification', {
                         status: 'error',
