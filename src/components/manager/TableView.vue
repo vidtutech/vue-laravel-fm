@@ -50,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-if="!isRootPath">
+                <tr v-if="!isRootPath" id="fm-back-btn-table-view">
                     <td colspan="4" class="fm-content-item max-w-[1px]" v-on:click="levelUp">
                         <i class="bi bi-arrow-90deg-up" />
                     </td>

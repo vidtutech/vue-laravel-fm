@@ -168,9 +168,15 @@ export default {
                 return;
             }
 
-            // show, play..
-            if (this.$store.state.fm.settings.imageExtensions.includes(extension.toLowerCase())) {
-                // show image
+            if (
+                [
+                    ...this.$store.state.fm.settings.imageExtensions,
+                    ...this.$store.state.fm.settings.videoExtensions,
+                    ...this.$store.state.fm.settings.audioExtensions,
+                    ...this.$store.state.fm.settings.docExtensions,
+                ].includes(extension.toLowerCase())
+            ) {
+                // use preview modal to trigger preview of image/pdf/video/audio
                 this.$store.commit('fm/modal/setModalState', {
                     modalName: 'PreviewModal',
                     show: true,
@@ -181,24 +187,8 @@ export default {
                     modalName: 'TextEditModal',
                     show: true,
                 });
-            } else if (this.$store.state.fm.settings.audioExtensions.includes(extension.toLowerCase())) {
-                // show player modal
-                this.$store.commit('fm/modal/setModalState', {
-                    modalName: 'AudioPlayerModal',
-                    show: true,
-                });
-            } else if (this.$store.state.fm.settings.videoExtensions.includes(extension.toLowerCase())) {
-                // show player modal
-                this.$store.commit('fm/modal/setModalState', {
-                    modalName: 'VideoPlayerModal',
-                    show: true,
-                });
-            } else if (extension.toLowerCase() === 'pdf') {
-                // show pdf document
-                this.$store.dispatch('fm/openPDF', {
-                    disk: this.selectedDisk,
-                    path,
-                });
+            } else {
+                console.warn('Unknown Extension. No action performed', extension);
             }
         },
     },

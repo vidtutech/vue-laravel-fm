@@ -12,7 +12,7 @@
     "license": "MIT",
     "main": "src/init.js",
     "scripts": {
-        "dev": "vite --host",
+        "dev": "vite build -m development",
         "build": "vite build",
         "preview": "vite preview"
     },

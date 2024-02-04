@@ -13,10 +13,10 @@
                 class="breadcrumb-item"
                 v-for="(item, index) in breadcrumb"
                 v-bind:key="index"
-                v-bind:class="[breadcrumb.length === index + 1 ? 'font-semibold' : '']"
+                v-bind:class="[breadcrumb.length === index + 1 ? 'active' : '']"
                 v-on:click="selectDirectory(index)"
             >
-                <span class="font-light">/</span>
+                <span class="breadcrumb-slash font-light">/</span>
                 <span>{{ item }}</span>
             </li>
         </ol>

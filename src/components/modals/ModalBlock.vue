@@ -18,8 +18,6 @@ import StatusModal from './views/StatusModal.vue';
 import RenameModal from './views/RenameModal.vue';
 import PropertiesModal from './views/PropertiesModal.vue';
 import TextEditModal from './views/TextEditModal.vue';
-import AudioPlayerModal from './views/AudioPlayerModal.vue';
-import VideoPlayerModal from './views/VideoPlayerModal.vue';
 import ZipModal from './views/ZipModal.vue';
 import PreviewModal from './views/PreviewModal.vue';
 import UnzipModal from './views/UnzipModal.vue';
@@ -36,8 +34,6 @@ export default {
         RenameModal,
         PropertiesModal,
         TextEditModal,
-        AudioPlayerModal,
-        VideoPlayerModal,
         ZipModal,
         UnzipModal,
         PreviewModal,

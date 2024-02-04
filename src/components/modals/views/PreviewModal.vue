@@ -2,8 +2,8 @@
     <div class="fm-modal-content fm-modal-preview">
         <div class="fm-modal-header">
             <h5 class="fm-modal-title">
-                {{ showCropperModule ? lang.modal.cropper.title : lang.modal.preview.title }}
-                <small class="text-muted pl-3">{{ selectedItem.basename }}</small>
+                {{ lang.modal.preview.loading }}
+                <small class="font-bold">{{ selectedItem.basename }}</small>
             </h5>
             <button
                 id="close-fm-preview-modal"
@@ -17,24 +17,17 @@
         </div>
         <div class="fm-modal-body">
             <transition name="fade" mode="out-in">
-                <div class="flex size-full flex-col content-center items-center justify-center" v-if="!imgSrc">
+                <div class="flex size-full flex-col content-center items-center justify-center" v-if="previewLoaded">
                     <span
                         className="loading loading-bars w-[20%] text-vidtu-red transition-colors delay-150 ease-in-out motion-reduce:transition-none motion-reduce:hover:transform-none lg:w-[10%]"
                     />
                 </div>
-                <img
-                    v-else
-                    v-bind:src="imgSrc"
-                    v-bind:alt="selectedItem.basename"
-                    v-bind:style="{ 'max-height': maxHeight + 'px' }"
-                />
             </transition>
         </div>
     </div>
 </template>
 
 <script>
-import CropperModule from '../additions/CropperModule.vue';
 import modal from '../mixins/modal';
 import translate from '../../../mixins/translate';
 import helper from '../../../mixins/helper';
@@ -44,15 +37,15 @@ import EventBus from '../../../emitter';
 export default {
     name: 'PreviewModal',
     mixins: [modal, translate, helper],
-    components: { CropperModule },
     data() {
         return {
             showCropperModule: false,
-            imgSrc: null,
+            previewLoaded: false,
+            previewFailed: false,
         };
     },
     mounted() {
-        this.loadImage();
+        this.loadPreview();
     },
     computed: {
         /**
@@ -114,14 +107,13 @@ export default {
          */
         closeCropper() {
             this.showCropperModule = false;
-            this.loadImage();
+            this.loadPreview();
         },
 
         /**
          * Load image
          */
-        loadImage() {
-            console.log('loadImage');
+        loadPreview() {
             EventBus.emit(
                 'addNotification',
                 {
@@ -130,36 +122,31 @@ export default {
                 },
                 1000
             );
-            // if authorization required
-            if (this.auth) {
-                console.log('this.auth', this.auth);
-                GET.preview(this.selectedDisk, this.selectedItem.path)
-                    .then((response) => {
-                        const mimeType = response.headers['content-type'].toLowerCase();
-                        const imgBase64 = Buffer.from(response.data, 'binary').toString('base64');
-
-                        this.imgSrc = `data:${mimeType};base64,${imgBase64}`;
-                        EventBus.emit('addNotification', {
-                            status: 'success',
-                            message: this.lang.response.previewLoaded,
-                        });
-                    })
-                    .catch((error) => {
-                        console.error('Failed to load image', error);
-                        EventBus.emit('addNotification', {
-                            status: 'error',
-                            message: this.lang.response.previewFailed,
-                        });
-                    });
-            } else {
-                this.imgSrc = `${this.$store.getters['fm/settings/baseUrl']}preview?disk=${
+            fetch(
+                `${this.$store.getters['fm/settings/baseUrl']}preview?disk=${
                     this.selectedDisk
-                }&path=${encodeURIComponent(this.selectedItem.path)}&v=${this.selectedItem.timestamp}`;
-                EventBus.emit('addNotification', {
-                    status: 'success',
-                    message: this.lang.response.previewLoaded,
+                }&path=${encodeURIComponent(this.selectedItem.path)}&v=${this.selectedItem.timestamp}`,
+                { cache: 'reload', mode: 'no-cors' }
+            )
+                .then((res) => {
+                    console.log('preview loaded', res);
+                    this.previewLoaded = true;
+                    EventBus.emit('addNotification', {
+                        status: 'success',
+                        message: this.lang.response.previewLoaded,
+                    });
+                })
+                .catch((error) => {
+                    console.error('Failed to load preview', error);
+                    this.previewFailed = true;
+                    EventBus.emit('addNotification', {
+                        status: 'error',
+                        message: this.lang.response.previewFailed,
+                    });
+                })
+                .finally(() => {
+                    if (this.hideModal) this.hideModal();
                 });
-            }
         },
     },
 };

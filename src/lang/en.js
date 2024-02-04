@@ -89,6 +89,7 @@ const en = {
         },
         preview: {
             title: 'Preview',
+            loading: 'Loading Preview',
         },
         properties: {
             disk: 'Disk',

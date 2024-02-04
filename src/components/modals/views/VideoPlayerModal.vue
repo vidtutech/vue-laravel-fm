@@ -68,7 +68,4 @@ export default {
 
 <style lang="scss">
 @import 'plyr/src/sass/plyr.scss';
-
-.fm-modal-video-player {
-}
 </style>

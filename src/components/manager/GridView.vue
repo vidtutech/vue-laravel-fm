@@ -1,6 +1,6 @@
 <template>
     <div class="fm-grid">
-        <div v-if="!isRootPath" v-on:click="levelUp" class="fm-grid-item text-center">
+        <div v-if="!isRootPath" v-on:click="levelUp" class="fm-grid-item text-center" id="fm-back-btn-grid-view">
             <div class="fm-item-icon">
                 <i class="bi bi-arrow-90deg-up pb-2" />
             </div>
