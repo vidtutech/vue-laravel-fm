@@ -84,12 +84,12 @@ const en = {
         },
         newFolder: {
             fieldName: 'Folder name',
-            fieldFeedback: 'Folder exists!',
+            fieldFeedback: 'Folder already exists!',
             title: 'Create new folder',
         },
         preview: {
             title: 'Preview',
-            loading: 'Loading Preview',
+            loading: 'Loading File Preview',
         },
         properties: {
             disk: 'Disk',
