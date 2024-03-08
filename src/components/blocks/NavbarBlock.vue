@@ -1,133 +1,227 @@
 <template>
     <div class="fm-navbar">
-        <div class="flex flex-col w-full gap-2 md:flex-row md:justify-between">
+        <div class="flex w-full gap-2 justify-between" role="group">
+            <div class="flex gap-2 flex-wrap" role="group">
+                <div class="flex gap-2 flex-wrap" role="group">
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="backDisabled"
+                        v-bind:title="lang.btn.back"
+                        v-on:click="historyBack()"
+                    >
+                        <i class="bi bi-caret-left-fill text-lg" />
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="forwardDisabled"
+                        v-bind:title="lang.btn.forward"
+                        v-on:click="historyForward()"
+                    >
+                        <i class="bi bi-caret-right-fill text-lg" />
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="refreshAll()"
+                        v-bind:title="lang.btn.refresh"
+                    >
+                        <i class="bi bi-arrow-repeat text-lg"></i>
+                    </button>
+                </div>
+                <div class="hidden lg:flex gap-2 flex-wrap" role="group">
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="showModal('NewFileModal')"
+                        v-bind:title="lang.btn.file"
+                    >
+                        <i class="bi bi-file-plus text-lg"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="showModal('NewFolderModal')"
+                        v-bind:title="lang.btn.folder"
+                    >
+                        <i class="bi bi-folder-plus text-lg"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="uploading"
+                        v-on:click="showModal('UploadModal')"
+                        v-bind:title="lang.btn.upload"
+                    >
+                        <i class="bi bi-upload text-lg"></i>
+                    </button>
+                </div>
+                <div class="hidden lg:flex flex gap-2 flex-wrap" role="group">
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!isAnyItemSelected"
+                        v-bind:title="lang.btn.cut"
+                        v-on:click="toClipboard('cut')"
+                    >
+                        <i class="bi bi-scissors text-lg"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!isAnyItemSelected"
+                        v-bind:title="lang.btn.copy"
+                        v-on:click="toClipboard('copy')"
+                    >
+                        <i class="bi bi-files text-lg"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!clipboardType"
+                        v-bind:title="lang.btn.paste"
+                        v-on:click="paste"
+                    >
+                        <i class="bi bi-clipboard text-lg"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!isAnyItemSelected"
+                        v-on:click="showModal('DeleteModal')"
+                        v-bind:title="lang.btn.delete"
+                    >
+                        <i class="bi bi-trash text-lg"></i>
+                    </button>
+                </div>
+            </div>
             <div class="flex gap-2 flex-wrap" role="group">
                 <button
                     type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
+                    class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                    v-on:click="selectView(viewType === 'grid' ? 'table' : 'grid')"
+                    v-bind:title="`Switch to ${lang.btn[viewType] === 'grid' ? 'list' : 'grid'} view.`"
+                >
+                    <i :class="['text-lg', 'bi', 'bi-' + (viewType === 'grid' ? 'list-ul' : 'grid')]"></i>
+                </button>
+                <button
+                    type="button"
+                    title="More Options"
+                    class="flex lg:hidden aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
                     v-bind:disabled="backDisabled"
-                    v-bind:title="lang.btn.back"
-                    v-on:click="historyBack()"
+                    v-on:click="toggleMenu"
                 >
-                    <i class="bi bi-skip-backward-fill" />
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:disabled="forwardDisabled"
-                    v-bind:title="lang.btn.forward"
-                    v-on:click="historyForward()"
-                >
-                    <i class="bi bi-skip-forward-fill" />
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-on:click="refreshAll()"
-                    v-bind:title="lang.btn.refresh"
-                >
-                    <i class="bi bi-arrow-repeat"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-on:click="showModal('NewFileModal')"
-                    v-bind:title="lang.btn.file"
-                >
-                    <i class="bi bi-file-earmark"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-on:click="showModal('NewFolderModal')"
-                    v-bind:title="lang.btn.folder"
-                >
-                    <i class="bi bi-folder"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    disabled
-                    v-if="uploading"
-                    v-bind:title="lang.btn.upload"
-                >
-                    <i class="bi bi-upload"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-else
-                    v-on:click="showModal('UploadModal')"
-                    v-bind:title="lang.btn.upload"
-                >
-                    <i class="bi bi-upload"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:disabled="!isAnyItemSelected"
-                    v-on:click="showModal('DeleteModal')"
-                    v-bind:title="lang.btn.delete"
-                >
-                    <i class="bi bi-trash"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:disabled="!isAnyItemSelected"
-                    v-bind:title="lang.btn.copy"
-                    v-on:click="toClipboard('copy')"
-                >
-                    <i class="bi bi-files"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:disabled="!isAnyItemSelected"
-                    v-bind:title="lang.btn.cut"
-                    v-on:click="toClipboard('cut')"
-                >
-                    <i class="bi bi-scissors"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:disabled="!clipboardType"
-                    v-bind:title="lang.btn.paste"
-                    v-on:click="paste"
-                >
-                    <i class="bi bi-clipboard"></i>
+                    <i class="bi bi-three-dots-vertical"></i>
                 </button>
             </div>
-            <div class="flex gap-2 flex-wrap" role="group">
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:class="[viewType === 'table' ? 'active' : '']"
-                    v-on:click="selectView('table')"
-                    v-bind:title="lang.btn.table"
-                >
-                    <i class="bi bi-view-list"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:class="[viewType === 'grid' ? 'active' : '']"
-                    v-on:click="selectView('grid')"
-                    v-bind:title="lang.btn.grid"
-                >
-                    <i class="bi bi-grid"></i>
-                </button>
-                <button
-                    type="button"
-                    class="btn ring-1 ring-blue-600 bg-blue-400/75 hover:bg-blue-400 text-dark dark:text-light disabled:opacity-75 disabled:text-dark disabled:dark:text-light"
-                    v-bind:title="lang.btn.fullScreen"
-                    v-bind:class="{ active: fullScreen }"
-                    v-on:click="screenToggle"
-                >
-                    <i class="bi bi-arrows-fullscreen"></i>
-                </button>
-            </div>
+        </div>
+        <div v-if="showMenu" class="fm-navbar-menu" v-click-outside="closeMenu">
+            <ul class="bg-blue-400/25">
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center rounded-t-xl hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="
+                            showModal('NewFileModal');
+                            closeMenu();
+                        "
+                        v-bind:title="lang.btn.file"
+                    >
+                        <i class="bi bi-file-plus text-lg"></i>
+                        <span>{{ lang.btn.file }}</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="
+                            showModal('NewFolderModal');
+                            closeMenu();
+                        "
+                        v-bind:title="lang.btn.folder"
+                    >
+                        <i class="bi bi-folder-plus text-lg"></i>
+                        <span>{{ lang.btn.folder }}</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="uploading"
+                        v-on:click="
+                            showModal('UploadModal');
+                            closeMenu();
+                        "
+                        v-bind:title="lang.btn.upload"
+                    >
+                        <i class="bi bi-upload text-lg"></i>
+                        <span>{{ lang.btn.upload }}</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!isAnyItemSelected"
+                        v-bind:title="lang.btn.cut"
+                        v-on:click="
+                            toClipboard('cut');
+                            closeMenu();
+                        "
+                    >
+                        <i class="bi bi-scissors text-lg"></i>
+                        <span>{{ lang.btn.cut }}</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!isAnyItemSelected"
+                        v-bind:title="lang.btn.copy"
+                        v-on:click="
+                            toClipboard('copy');
+                            closeMenu();
+                        "
+                    >
+                        <i class="bi bi-files text-lg"></i>
+                        <span>{{ lang.btn.copy }}</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!clipboardType"
+                        v-bind:title="lang.btn.paste"
+                        v-on:click="
+                            paste;
+                            closeMenu();
+                        "
+                    >
+                        <i class="bi bi-clipboard text-lg"></i>
+                        <span>{{ lang.btn.paste }}</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light disabled:pointer-events-none disabled:opacity-50"
+                        v-bind:disabled="!isAnyItemSelected"
+                        v-bind:title="lang.btn.delete"
+                        v-on:click="
+                            showModal('DeleteModal');
+                            closeMenu();
+                        "
+                    >
+                        <i class="bi bi-trash text-lg"></i>
+                        <span>{{ lang.btn.delete }}</span>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -139,6 +233,11 @@ import EventBus from '../../emitter';
 export default {
     name: 'NavbarBlock',
     mixins: [translate],
+    data() {
+        return {
+            showMenu: false,
+        };
+    },
     computed: {
         /**
          * Active manager name
@@ -220,6 +319,28 @@ export default {
     },
     methods: {
         /**
+         * Open navbar menu
+         */
+        toggleMenu(event) {
+            event.stopPropagation();
+            this.showMenu = !this.showMenu;
+        },
+
+        /**
+         * Close navbar menu
+         */
+        closeMenu() {
+            this.showMenu = false;
+        },
+
+        /**
+         * Close menu on resize
+         */
+        handleResize() {
+            this.showMenu = false;
+        },
+
+        /**
          * Refresh file manager
          */
         refreshAll() {
@@ -294,35 +415,12 @@ export default {
         selectView(type) {
             if (this.viewType !== type) this.$store.commit(`fm/${this.activeManager}/setView`, type);
         },
-
-        /**
-         * Full screen toggle
-         */
-        screenToggle() {
-            const fm = document.getElementsByClassName('fm')[0];
-
-            if (!this.fullScreen) {
-                if (fm.requestFullscreen) {
-                    fm.requestFullscreen();
-                } else if (fm.mozRequestFullScreen) {
-                    fm.mozRequestFullScreen();
-                } else if (fm.webkitRequestFullscreen) {
-                    fm.webkitRequestFullscreen();
-                } else if (fm.msRequestFullscreen) {
-                    fm.msRequestFullscreen();
-                }
-            } else if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
-
-            this.$store.commit('fm/screenToggle');
-        },
+    },
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.handleResize);
     },
 };
 </script>

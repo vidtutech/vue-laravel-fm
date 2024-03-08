@@ -3,7 +3,6 @@
         <div class="fm-modal-header">
             <h5 class="fm-modal-title">
                 {{ lang.modal.preview.loading }}
-                <small class="font-bold">{{ selectedItem.basename }}</small>
             </h5>
             <button
                 id="close-fm-preview-modal"
@@ -16,13 +15,15 @@
             </button>
         </div>
         <div class="fm-modal-body">
-            <transition name="fade" mode="out-in">
-                <div class="flex size-full flex-col content-center items-center justify-center" v-if="previewLoaded">
-                    <span
-                        className="loading loading-bars w-[20%] text-vidtu-red transition-colors delay-150 ease-in-out motion-reduce:transition-none motion-reduce:hover:transform-none lg:w-[10%]"
-                    />
-                </div>
-            </transition>
+            <div class="flex w-full gap-1 itesm-center truncate">
+                <span>Loading:</span>
+                <span class="font-semibold truncate w-[85%]">{{ selectedItem.basename }}</span>
+            </div>
+            <div class="flex size-full flex-col content-center items-center justify-center">
+                <span
+                    className="loading loading-bars w-[20%] text-vidtu-red transition-colors delay-150 ease-in-out motion-reduce:transition-none motion-reduce:hover:transform-none lg:w-[10%]"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -131,10 +132,14 @@ export default {
                 .then((res) => {
                     console.log('preview loaded', res);
                     this.previewLoaded = true;
-                    EventBus.emit('addNotification', {
-                        status: 'success',
-                        message: this.lang.response.previewLoaded,
-                    });
+                    EventBus.emit(
+                        'addNotification',
+                        {
+                            status: 'success',
+                            message: this.lang.response.previewLoaded,
+                        },
+                        1000
+                    );
                 })
                 .catch((error) => {
                     console.warn('Failed to load preview', error);
@@ -151,22 +156,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-modal-preview {
-    .modal-body {
-        padding: 0;
-
-        img {
-            display: block;
-            max-width: 100%;
-            object-fit: contain;
-        }
-    }
-
-    & > .d-flex {
-        padding: 1rem;
-        border-top: 1px solid #e9ecef;
-    }
-}
-</style>

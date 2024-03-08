@@ -92,8 +92,8 @@ export default {
     align-items: center;
 
     .img-thumbnail {
-        width: 88px;
-        height: 88px;
+        width: 64px;
+        height: 64px;
     }
 
     .fade-enter-active,

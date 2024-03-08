@@ -119,7 +119,7 @@
             <button
                 type="button"
                 class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-bold items-center text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
-                v-on:click="hideModal()"
+                v-on:click="hideModal"
             >
                 {{ lang.btn.cancel }}
             </button>

@@ -4,7 +4,7 @@
         v-bind:class="{ 'size-full pb-0': fullScreen }"
     >
         <navbar-block />
-        <div class="relative flex size-full py-2 overflow-hidden border-y border-dark dark:border-light">
+        <div class="relative flex size-full py-0 overflow-hidden border-y border-blue-400/25">
             <notification-block />
             <context-menu />
             <modal-block v-if="showModal" />
@@ -140,7 +140,7 @@ export default {
                 },
                 (error) => {
                     // loading spinner -
-                    this.$store.commit('fm/messages/subtractLoading');
+                    this.$store.commit('fm/messages/clearLoading');
                     return Promise.reject(error);
                 }
             );
@@ -153,7 +153,7 @@ export default {
             this.interceptorIndex.response = HTTP.interceptors.response.use(
                 (response) => {
                     // loading spinner -
-                    this.$store.commit('fm/messages/subtractLoading');
+                    this.$store.commit('fm/messages/clearLoading');
 
                     // create notification, if find message text
                     if (Object.prototype.hasOwnProperty.call(response.data, 'result')) {
@@ -180,7 +180,7 @@ export default {
                 },
                 (error) => {
                     // loading spinner -
-                    this.$store.commit('fm/messages/subtractLoading');
+                    this.$store.commit('fm/messages/clearLoading');
 
                     const errorMessage = {
                         status: 0,

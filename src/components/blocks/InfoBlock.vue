@@ -1,45 +1,50 @@
 <template>
-    <div class="fm-info-block flex justify-between">
-        <div class="flex">
-            <span v-show="selectedCount">
-                {{ `${lang.info.selected} ${selectedCount}` }}
-                {{ `${lang.info.selectedSize} ${selectedFilesSize}` }}
-            </span>
-            <span v-show="!selectedCount">
-                {{ `${lang.info.directories} ${directoriesCount}` }}
-                {{ `${lang.info.files} ${filesCount}` }}
-                {{ `${lang.info.size} ${filesSize}` }}
-            </span>
-        </div>
-        <div class="flex w-1/3">
-            <!-- Progress Bar -->
-            <div class="progress" v-show="progressBar">
-                <div
-                    class="progress-bar progress-bar-striped bg-info"
-                    role="progressbar"
-                    v-bind:aria-valuenow="progressBar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    v-bind:style="{ width: progressBar + '%' }"
-                >
-                    {{ progressBar }}%
+    <div class="fm-info-block">
+        <div class="flex w-full text-xs lg:text-sm items-center">
+            <div v-bind:class="[selectedCount ? 'flex' : 'hidden']" class="gap-2 items-center">
+                <div class="flex gap-1 items-center">
+                    <span>{{ lang.info.selected }}</span>
+                    <span class="font-semibold">{{ selectedCount }}</span>
+                </div>
+                <div class="flex gap-1 items-center">
+                    <span>{{ lang.info.selectedSize }}</span>
+                    <span class="font-semibold">{{ selectedFilesSize }}</span>
+                </div>
+            </div>
+            <div v-bind:class="[selectedCount ? 'hidden' : 'flex']" class="gap-2 items-center">
+                <div class="flex gap-1 items-center">
+                    <span>{{ lang.info.directories }}</span>
+                    <span class="font-semibold">{{ directoriesCount }}</span>
+                </div>
+                <div class="flex gap-1 items-center">
+                    <span>{{ lang.info.files }}</span>
+                    <span class="font-semibold">{{ filesCount }}</span>
+                </div>
+                <div class="flex gap-1 items-center">
+                    <span>{{ lang.info.size }}</span>
+                    <span class="font-semibold">{{ filesSize }}</span>
                 </div>
             </div>
         </div>
-        <div class="flex text-right">
-            <div class="spinner-border spinner-border-sm text-info" role="status" v-show="loadingSpinner">
-                <span class="visually-hidden">Loading...</span>
+        <div class="flex gap-2 items-center">
+            <div :class="['gap-1', 'items-center', loadingSpinner ? 'flex' : 'hidden']" role="status">
+                <span class="inline-flex animate-spin">
+                    <i class="bi bi-arrow-repeat"></i>
+                </span>
+                <span class="hidden lg:block visually-hidden">Loading...</span>
             </div>
             <span
                 v-show="clipboardType"
                 v-on:click="showModal('ClipboardModal')"
+                class="font-semibold cursor-pointer"
                 v-bind:title="[lang.clipboard.title + ' - ' + lang.clipboard[clipboardType]]"
             >
                 <i class="bi bi-clipboard"></i>
             </span>
             <span
                 v-on:click="showModal('StatusModal')"
-                v-bind:class="[hasErrors ? 'text-danger' : 'text-success']"
+                class="font-semibold cursor-pointer"
+                v-bind:class="[hasErrors ? 'text-vidtu-red' : '']"
                 v-bind:title="lang.modal.status.title"
             >
                 <i class="bi bi-info-circle-fill"></i>
@@ -127,7 +132,6 @@ export default {
         clipboardType() {
             return this.$store.state.fm.clipboard.type;
         },
-
         /**
          * Spinner
          * @returns {number}
@@ -150,21 +154,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-info-block {
-    flex: 0 0 auto;
-    padding-top: 0.2rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid #6c757d;
-
-    .progress {
-        margin-top: 0.3rem;
-    }
-
-    .text-right > span {
-        padding-left: 0.5rem;
-        cursor: pointer;
-    }
-}
-</style>

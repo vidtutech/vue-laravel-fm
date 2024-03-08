@@ -69,7 +69,6 @@ export default {
          * @param event
          */
         showMenu(event) {
-            console.log(event, this.$refs);
             if (this.selectedItems) {
                 this.menuVisible = true;
 

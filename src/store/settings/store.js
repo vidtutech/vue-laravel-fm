@@ -2,24 +2,7 @@ import mutations from './mutations';
 import getters from './getters';
 
 // languages
-import ru from '../../lang/ru';
 import en from '../../lang/en';
-import ar from '../../lang/ar';
-import sr from '../../lang/sr';
-import cs from '../../lang/cs';
-import de from '../../lang/de';
-import es from '../../lang/es';
-import nl from '../../lang/nl';
-/* eslint camelcase: 0 */
-import zh_CN from '../../lang/zh_CN';
-import fa from '../../lang/fa';
-import it from '../../lang/it';
-import tr from '../../lang/tr';
-import fr from '../../lang/fr';
-import pt_BR from '../../lang/pt_BR';
-import zh_TW from '../../lang/zh_TW';
-import pl from '../../lang/pl';
-import hu from '../../lang/hu';
 
 export default {
     namespaced: true,
@@ -50,23 +33,7 @@ export default {
 
             // Translations (/src/lang)
             translations: {
-                ru: Object.freeze(ru),
                 en: Object.freeze(en),
-                ar: Object.freeze(ar),
-                sr: Object.freeze(sr),
-                cs: Object.freeze(cs),
-                de: Object.freeze(de),
-                es: Object.freeze(es),
-                nl: Object.freeze(nl),
-                'zh-CN': Object.freeze(zh_CN),
-                fa: Object.freeze(fa),
-                it: Object.freeze(it),
-                tr: Object.freeze(tr),
-                fr: Object.freeze(fr),
-                'pt-BR': Object.freeze(pt_BR),
-                'zh-TW': Object.freeze(zh_TW),
-                pl: Object.freeze(pl),
-                hu: Object.freeze(hu),
             },
 
             // show or hide hidden files

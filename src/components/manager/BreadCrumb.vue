@@ -1,11 +1,8 @@
 <template>
     <nav aria-label="breadcrumb" class="fm-breadcrumb">
-        <ol
-            class="breadcrumb"
-            v-bind:class="[manager === activeManager ? 'bg-dark/20 dark:bg-light/20' : 'bg-dark/10 dark:bg-light/10']"
-        >
+        <ol class="breadcrumb">
             <li class="breadcrumb-item" v-on:click="selectMainDirectory">
-                <span class="badge bg-dark/10 dark:bg-light/10 text-dark dark:text-light">
+                <span class="badge bg-dark dark:bg-light text-light dark:text-dark text-lg cursor-pointer">
                     <i class="bi bi-hdd"></i>
                 </span>
             </li>
@@ -88,15 +85,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.fm-breadcrumb {
-    .breadcrumb {
-        .breadcrumb-item:not(.active):hover {
-            cursor: pointer;
-            font-weight: normal;
-            color: #6c757d;
-        }
-    }
-}
-</style>

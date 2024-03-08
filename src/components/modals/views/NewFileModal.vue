@@ -1,31 +1,52 @@
 <template>
-    <div class="fm-modal-content fm-modal-folder">
+    <div class="fm-modal-content">
         <div class="fm-modal-header">
-            <h5 class="fm-modal-title">{{ lang.modal.newFile.title }}</h5>
-            <button type="button" class="btn-close" aria-label="Close" v-on:click="hideModal"></button>
+            <h5 class="fm-modal-title">
+                {{ lang.modal.newFile.title }}
+            </h5>
+            <button
+                id="close-fm-preview-modal"
+                type="button"
+                class="ml-auto flex rounded-full bg-dark/10 hover:bg-dark/20 px-4 py-3 dark:bg-light/10 dark:hover:bg-light/20 text-dark dark:text-light"
+                aria-label="Close"
+                v-on:click="hideModal"
+            >
+                <i class="bi bi-x-lg" />
+            </button>
         </div>
         <div class="fm-modal-body">
-            <div class="form-group">
+            <div class="flex flex-col gap-3 justify-between p-3 rounded-xl">
                 <label for="fm-file-name">{{ lang.modal.newFile.fieldName }}</label>
                 <input
                     type="text"
-                    class="form-control"
+                    class="w-full rounded-lg bg-dark/5 dark:bg-light/5 text-dark dark:text-light"
                     id="fm-file-name"
                     v-focus
-                    v-bind:class="{ 'is-invalid': fileExist }"
+                    v-bind:class="{ 'border-vidtu-red': fileExist }"
                     v-model="fileName"
                     v-on:keyup="validateFileName"
                 />
-                <div class="invalid-feedback" v-show="fileExist">
+                <div class="invalid-feedback text-vidtu-red font-semibold" v-show="fileExist">
                     {{ lang.modal.newFile.fieldFeedback }}
                 </div>
             </div>
         </div>
         <div class="fm-modal-footer">
-            <button type="button" class="btn btn-info" v-bind:disabled="!submitActive" v-on:click="addFile">
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-green-400/80 px-3 py-2 text-lg font-semibold items-center text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white disabled:opacity-50 disabled:hover:scale-100"
+                v-bind:disabled="!submitActive"
+                v-on:click="addFile"
+            >
                 {{ lang.btn.submit }}
             </button>
-            <button type="button" class="btn btn-light" v-on:click="hideModal">{{ lang.btn.cancel }}</button>
+            <button
+                type="button"
+                class="inline-flex w-fit rounded-lg bg-black px-3 py-2 text-base font-bold items-center text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
+                v-on:click="hideModal"
+            >
+                {{ lang.btn.cancel }}
+            </button>
         </div>
     </div>
 </template>
