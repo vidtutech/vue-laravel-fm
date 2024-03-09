@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative flex flex-col p-1 size-full bg-light dark:bg-dark text-dark dark:text-light"
+        class="relative flex flex-col size-full bg-light dark:bg-dark text-dark dark:text-light"
         v-bind:class="{ 'size-full pb-0': fullScreen }"
     >
         <navbar-block />
