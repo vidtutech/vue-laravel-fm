@@ -2,33 +2,26 @@
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
 import fm from './store';
-import ClickOutside from './directives/ClickOutside';
-// import sharedFm from './store';
 import FMApp from './FileManager.vue';
-// import SharedFMApp from './FileManager.vue';
+import ClickOutside from './directives/ClickOutside';
 
-window.loadFm = async (path = 'room') => {
-    console.log(`fm.min.js :: loadFm :: ${path}`, path === 'shared' ? window['sharedFm'] : window['fm']);
-
+export const loadFm = async (path = 'room') => {
     const app = createApp(FMApp);
 
-    const store = createStore({ strict: true, modules: { fm } });
+    const storeModules = Object.assign({}, Object.freeze({ strict: true, modules: { fm } }));
 
-    app.directive('click-outside', ClickOutside);
+    const store = createStore(storeModules);
+
+    app.use(store).directive('click-outside', ClickOutside);
+
+    window['fm'] = app;
+    window['sharedFm'] = app;
 
     if (path === 'shared') {
-        if (window['sharedFm'] && window['sharedFm'].unmount) window['sharedFm'].unmount();
-
-        window['sharedFm'] = app.use(store);
-
         window['sharedFm'].mount('#shared-fm');
     } else {
-        if (window['fm'] && window['fm'].unmount) window['fm'].unmount();
-
-        window['fm'] = app.use(store);
-
         window['fm'].mount('#fm');
     }
-
-    console.log(`fm.min.js :: loaded :: ${path}`, path === 'shared' ? window['sharedFm'] : window['fm']);
 };
+
+window.loadFm = loadFm;

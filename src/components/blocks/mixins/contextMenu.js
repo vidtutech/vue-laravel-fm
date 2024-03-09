@@ -37,7 +37,7 @@ export default {
          * @returns {*}
          */
         firstItemType() {
-            return this.$store.getters['fm/selectedItems'][0].type;
+            return this.$store.getters['fm/selectedItems'].at(0)?.type;
         },
     },
     methods: {

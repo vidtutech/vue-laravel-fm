@@ -5,9 +5,9 @@
                 {{ lang.modal.preview.loading }}
             </h5>
             <button
-                id="close-fm-preview-modal"
                 type="button"
-                class="ml-auto flex rounded-full bg-dark/10 hover:bg-dark/20 px-4 py-3 dark:bg-light/10 dark:hover:bg-light/20 text-dark dark:text-light"
+                id="close-fm-preview-modal"
+                class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:hover:text-dark dark:text-light"
                 aria-label="Close"
                 v-on:click="hideModal"
             >

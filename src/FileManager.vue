@@ -4,7 +4,9 @@
         v-bind:class="{ 'size-full pb-0': fullScreen }"
     >
         <navbar-block />
-        <div class="relative flex size-full py-0 overflow-hidden border-y border-blue-400/25">
+        <div
+            class="relative flex size-full py-0 overflow-hidden border-y border-light/10 dark:border-black/20 bg-light/10 dark:bg-black/20"
+        >
             <notification-block />
             <context-menu />
             <modal-block v-if="showModal" />
