@@ -3,122 +3,208 @@
         <div class="flex w-full gap-2 justify-between" role="group">
             <div class="flex gap-2 flex-wrap" role="group">
                 <div class="flex gap-2 flex-wrap" role="group">
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="backDisabled"
-                        v-bind:title="lang.btn.back"
-                        v-on:click="historyBack()"
+                    <div
+                        v-tooltip="{
+                            content: `${lang.btn.back} ${backDisabled ? '(Currently disabled)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-caret-left-fill text-lg" />
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="forwardDisabled"
-                        v-bind:title="lang.btn.forward"
-                        v-on:click="historyForward()"
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="backDisabled"
+                            v-on:click="historyBack()"
+                        >
+                            <i class="bi bi-caret-left-fill text-lg" />
+                        </button>
+                    </div>
+                    <div
+                        v-tooltip="{
+                            content: `${lang.btn.forward} ${forwardDisabled ? '(Currently disabled)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-caret-right-fill text-lg" />
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-on:click="refreshAll()"
-                        v-bind:title="lang.btn.refresh"
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="forwardDisabled"
+                            v-on:click="historyForward()"
+                        >
+                            <i class="bi bi-caret-right-fill text-lg" />
+                        </button>
+                    </div>
+                    <div v-tooltip="{ content: lang.btn.refresh, distance: 10 }">
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-on:click="refreshAll()"
+                        >
+                            <i class="bi bi-arrow-repeat text-lg"></i>
+                        </button>
+                    </div>
+                    <div
+                        class="flex lg:hidden"
+                        v-tooltip="{
+                            content: `${lang.btn.download} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-arrow-repeat text-lg"></i>
-                    </button>
+                        <!-- this download button is only for smaller screens -->
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="!isAnyItemSelected"
+                            v-on:click="downloadFiles()"
+                        >
+                            <i class="bi bi-cloud-arrow-down text-lg"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="hidden lg:flex gap-2 flex-wrap" role="group">
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-on:click="showModal('NewFileModal')"
-                        v-bind:title="lang.btn.file"
+                    <div v-tooltip="{ content: lang.btn.file, distance: 10 }">
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-on:click="showModal('NewFileModal')"
+                        >
+                            <i class="bi bi-file-plus text-lg"></i>
+                        </button>
+                    </div>
+                    <div v-tooltip="{ content: lang.btn.folder, distance: 10 }">
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-on:click="showModal('NewFolderModal')"
+                        >
+                            <i class="bi bi-folder-plus text-lg"></i>
+                        </button>
+                    </div>
+                    <div v-tooltip="{ content: uploading ? 'Uploading...' : lang.btn.upload, distance: 10 }">
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="uploading"
+                            v-on:click="showModal('UploadModal')"
+                        >
+                            <i class="bi bi-upload text-lg"></i>
+                        </button>
+                    </div>
+                    <div
+                        class="hidden lg:flex"
+                        v-tooltip="{
+                            content: `${lang.btn.download} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-file-plus text-lg"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-on:click="showModal('NewFolderModal')"
-                        v-bind:title="lang.btn.folder"
-                    >
-                        <i class="bi bi-folder-plus text-lg"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="uploading"
-                        v-on:click="showModal('UploadModal')"
-                        v-bind:title="lang.btn.upload"
-                    >
-                        <i class="bi bi-upload text-lg"></i>
-                    </button>
+                        <!-- this download button is only for larger screens -->
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="!isAnyItemSelected"
+                            v-on:click="downloadFiles()"
+                        >
+                            <i class="bi bi-cloud-arrow-down text-lg"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="hidden lg:flex flex gap-2 flex-wrap" role="group">
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="!isAnyItemSelected"
-                        v-bind:title="lang.btn.cut"
-                        v-on:click="toClipboard('cut')"
+                    <div
+                        v-tooltip="{
+                            content: `${lang.btn.cut} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-scissors text-lg"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="!isAnyItemSelected"
-                        v-bind:title="lang.btn.copy"
-                        v-on:click="toClipboard('copy')"
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="!isAnyItemSelected"
+                            v-on:click="toClipboard('cut')"
+                        >
+                            <i class="bi bi-scissors text-lg"></i>
+                        </button>
+                    </div>
+                    <div
+                        v-tooltip="{
+                            content: `${lang.btn.copy} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-files text-lg"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="!clipboardType"
-                        v-bind:title="lang.btn.paste"
-                        v-on:click="paste"
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="!isAnyItemSelected"
+                            v-on:click="toClipboard('copy')"
+                        >
+                            <i class="bi bi-files text-lg"></i>
+                        </button>
+                    </div>
+                    <div v-tooltip="{ content: clipboardType ? lang.btn.paste : 'nothing to paste', distance: 10 }">
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="!clipboardType"
+                            v-on:click="paste()"
+                        >
+                            <i class="bi bi-clipboard text-lg"></i>
+                        </button>
+                    </div>
+                    <div
+                        v-tooltip="{
+                            content: `${lang.btn.delete} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                            distance: 10,
+                        }"
                     >
-                        <i class="bi bi-clipboard text-lg"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                        v-bind:disabled="!isAnyItemSelected"
-                        v-on:click="showModal('DeleteModal')"
-                        v-bind:title="lang.btn.delete"
-                    >
-                        <i class="bi bi-trash text-lg"></i>
-                    </button>
+                        <button
+                            type="button"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            v-bind:disabled="!isAnyItemSelected"
+                            v-on:click="showModal('DeleteModal')"
+                        >
+                            <i class="bi bi-trash text-lg"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="flex gap-2 flex-wrap" role="group">
-                <button
-                    type="button"
-                    class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                    v-on:click="selectView(viewType === 'grid' ? 'table' : 'grid')"
-                    v-bind:title="`Switch to ${lang.btn[viewType] === 'grid' ? 'list' : 'grid'} view.`"
+                <div
+                    v-tooltip="{
+                        content: `Switch to ${viewType === 'grid' ? 'list' : 'grid'} view`,
+                        distance: 10,
+                    }"
                 >
-                    <i :class="['text-lg', 'bi', 'bi-' + (viewType === 'grid' ? 'list-ul' : 'grid')]"></i>
-                </button>
-                <button
-                    type="button"
-                    title="More Options"
-                    class="flex lg:hidden aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
-                    v-bind:disabled="backDisabled"
-                    v-on:click="toggleMenu"
+                    <button
+                        type="button"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="selectView(viewType === 'grid' ? 'table' : 'grid')"
+                    >
+                        <i :class="['text-lg', 'bi', 'bi-' + (viewType === 'grid' ? 'list-ul' : 'grid')]"></i>
+                    </button>
+                </div>
+                <div
+                    v-tooltip="{
+                        content: 'More Options',
+                        distance: 10,
+                    }"
                 >
-                    <i class="bi bi-three-dots-vertical"></i>
-                </button>
+                    <button
+                        type="button"
+                        class="flex lg:hidden aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                        v-on:click="toggleMenu"
+                    >
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <div v-if="showMenu" class="fm-navbar-menu" v-click-outside="closeMenu">
             <ul>
-                <li>
+                <li
+                    v-tooltip="{
+                        content: lang.btn.file,
+                        distance: 10,
+                        placement: 'left',
+                    }"
+                >
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center rounded-t-xl hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
@@ -126,13 +212,18 @@
                             showModal('NewFileModal');
                             closeMenu();
                         "
-                        v-bind:title="lang.btn.file"
                     >
                         <i class="bi bi-file-plus text-lg"></i>
                         <span>{{ lang.btn.file }}</span>
                     </button>
                 </li>
-                <li>
+                <li
+                    v-tooltip="{
+                        content: lang.btn.folder,
+                        distance: 10,
+                        placement: 'left',
+                    }"
+                >
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
@@ -146,7 +237,7 @@
                         <span>{{ lang.btn.folder }}</span>
                     </button>
                 </li>
-                <li>
+                <li v-tooltip="{ content: uploading ? 'Uploading...' : lang.btn.upload, distance: 10 }">
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
@@ -161,7 +252,13 @@
                         <span>{{ lang.btn.upload }}</span>
                     </button>
                 </li>
-                <li>
+                <li
+                    v-tooltip="{
+                        content: `${lang.btn.cut} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                        distance: 10,
+                        placement: 'left',
+                    }"
+                >
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
@@ -176,7 +273,13 @@
                         <span>{{ lang.btn.cut }}</span>
                     </button>
                 </li>
-                <li>
+                <li
+                    v-tooltip="{
+                        content: `${lang.btn.copy} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                        distance: 10,
+                        placement: 'left',
+                    }"
+                >
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
@@ -191,14 +294,20 @@
                         <span>{{ lang.btn.copy }}</span>
                     </button>
                 </li>
-                <li>
+                <li
+                    v-tooltip="{
+                        content: `${lang.btn.paste} ${!isAnyItemSelected ? 'nothing to paste' : ''}`,
+                        distance: 10,
+                        placement: 'left',
+                    }"
+                >
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                         v-bind:disabled="!clipboardType"
                         v-bind:title="lang.btn.paste"
                         v-on:click="
-                            paste;
+                            paste();
                             closeMenu();
                         "
                     >
@@ -206,7 +315,13 @@
                         <span>{{ lang.btn.paste }}</span>
                     </button>
                 </li>
-                <li>
+                <li
+                    v-tooltip="{
+                        content: `${lang.btn.delete} ${!isAnyItemSelected ? '(needs selection)' : ''}`,
+                        distance: 10,
+                        placement: 'left',
+                    }"
+                >
                     <button
                         type="button"
                         class="flex gap-2 py-1.5 px-3 w-full cursor-pointer items-center hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
@@ -345,6 +460,7 @@ export default {
          */
         refreshAll() {
             this.$store.dispatch('fm/refreshAll');
+            console.log('peerId', this.$store.state.fm.peerId);
         },
 
         /**
@@ -390,6 +506,20 @@ export default {
         },
 
         /**
+         * download
+         */
+        downloadFiles() {
+            const selectedItems = this.$store.state.fm[this.activeManager].selected.files;
+            if (selectedItems.length) {
+                EventBus.emit('addNotification', {
+                    status: 'success',
+                    message: `Downloading ${selectedItems.length} file(s)`,
+                });
+                this.$store.dispatch('fm/downloadFiles');
+            }
+        },
+
+        /**
          * Set Hide or Show hidden files
          */
         toggleHidden() {
@@ -424,3 +554,18 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+.v-popper--theme-tooltip .v-popper__inner {
+    color: #fff !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    border-radius: 0.5rem !important;
+    background: rgba(97, 97, 97, 0.92) !important;
+}
+
+.v-popper__arrow-outer,
+.v-popper__arrow-inner {
+    visibility: hidden;
+}
+</style>
