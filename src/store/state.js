@@ -25,4 +25,7 @@ export default {
 
     // full screen mode
     fullScreen: false,
+
+    // peerId from Vidtu
+    peerId: null,
 };

@@ -115,6 +115,7 @@ export default {
          * Load image
          */
         loadPreview() {
+            console.log('peerId', this.$store.state.fm.peerId);
             EventBus.emit(
                 'addNotification',
                 {
@@ -126,7 +127,9 @@ export default {
             fetch(
                 `${this.$store.getters['fm/settings/baseUrl']}preview?disk=${
                     this.selectedDisk
-                }&path=${encodeURIComponent(this.selectedItem.path)}&v=${this.selectedItem.timestamp}`,
+                }&path=${encodeURIComponent(this.selectedItem.path)}&peerId=${this.$store.state.fm.peerId}&v=${
+                    this.selectedItem.timestamp
+                }`,
                 { cache: 'reload', mode: 'no-cors' }
             )
                 .then((res) => {

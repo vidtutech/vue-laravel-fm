@@ -116,6 +116,7 @@ export default {
         ...mapState('fm', {
             windowsConfig: (state) => state.settings.windowsConfig,
             activeManager: (state) => state.settings.activeManager,
+            peerId: (state) => state.settings.peerId,
             showModal: (state) => state.modal.showModal,
             fullScreen: (state) => state.settings.fullScreen,
         }),
