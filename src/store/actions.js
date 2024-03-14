@@ -247,7 +247,7 @@ export default {
         const config = {
             onUploadProgress(progressEvent) {
                 const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                commit('messages/setProgress', progress);
+                commit('messages/setProgress', progress < 99 ? progress : 99); // don't show 100% unless upload is finished on backend
             },
         };
 
@@ -255,7 +255,7 @@ export default {
         return POST.upload(data, config)
             .then((response) => {
                 // clear progress
-                commit('messages/clearProgress');
+                commit('messages/setProgress', 100);
 
                 if (response.data.result.status === 'success' && selectedDirectory === getters.selectedDirectory) {
                     dispatch('refreshManagers');
@@ -263,7 +263,10 @@ export default {
 
                 return response;
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log('Failed to upload file', error);
+            })
+            .finally(() => {
                 commit('messages/clearProgress');
             });
     },
@@ -582,5 +585,40 @@ export default {
                 `<iframe src="${URL.createObjectURL(blob)}" allowfullscreen height="100%" width="100%"></iframe>`
             );
         });
+    },
+
+    /**
+     * Download files
+     */
+    downloadFiles({ getters }) {
+        console.log('downloadFiles', getters);
+        if (Array.isArray(getters.selectedItems)) {
+            getters.selectedItems.forEach((file) => {
+                const selectedDisk = getters.selectedDisk;
+                console.log('downloading file', file, selectedDisk);
+                const tempLink = document.createElement('a');
+                tempLink.style.display = 'none';
+                tempLink.setAttribute('download', file.basename);
+                // download file with authorization
+                if (getters['settings/authHeader']) {
+                    console.log('downloading with auth headers');
+                    HTTP.download(selectedDisk, file.path).then((response) => {
+                        tempLink.href = window.URL.createObjectURL(new Blob([response.data]));
+                        console.log('tempLink.href', tempLink.href);
+                        document.body.appendChild(tempLink);
+                        tempLink.click();
+                        document.body.removeChild(tempLink);
+                    });
+                } else {
+                    tempLink.href = `${
+                        getters['settings/baseUrl']
+                    }download?disk=${selectedDisk}&path=${encodeURIComponent(file.path)}`;
+                    console.log('tempLink.href', tempLink.href);
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    document.body.removeChild(tempLink);
+                }
+            });
+        }
     },
 };
