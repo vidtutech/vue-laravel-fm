@@ -24,6 +24,7 @@ const en = {
         upload: 'Upload',
         uploadSelect: 'Select files',
         hidden: ' Hidden files',
+        download: 'Download selected file(s)',
     },
     clipboard: {
         actionType: 'Type',
