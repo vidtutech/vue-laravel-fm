@@ -28,8 +28,6 @@ export default {
                 if (window.location.search) {
                     const params = new URLSearchParams(window.location.search);
 
-                    console.log('params', params);
-
                     if (params.get('leftDisk')) {
                         leftDisk = params.get('leftDisk');
                     }
