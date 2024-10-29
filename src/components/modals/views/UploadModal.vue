@@ -20,7 +20,7 @@
                     {{ lang.btn.uploadSelect }}
                 </button>
                 <input
-                    class="absolute inset-0 opacity-0 cursor-pointer"
+                    class="absolute inset-0 cursor-pointer hidden"
                     type="file"
                     multiple
                     name="myfile"
