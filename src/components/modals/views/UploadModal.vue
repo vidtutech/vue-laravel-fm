@@ -113,7 +113,7 @@
         <div class="fm-modal-footer">
             <button
                 type="button"
-                class="inline-flex w-fit rounded-lg bg-green-600 dark:bg-green-400 px-3 py-2 text-lg font-semibold items-center text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white disabled:opacity-50 disabled:hover:scale-100"
+                class="inline-flex w-fit rounded-lg bg-green-600 dark:bg-green-400 px-3 py-2 text-lg font-semibold items-center text-white dark:text-black shadow-lg transition-all ease-in-out hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
                 v-bind:disabled="!countFiles"
                 v-on:click="uploadFiles"
             >
