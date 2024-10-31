@@ -20,10 +20,13 @@
                     {{ lang.btn.uploadSelect }}
                 </button>
                 <input
-                    class="absolute inset-0 cursor-pointer hidden"
+                    class="absolute inset-0 cursor-pointer opacity-0"
                     type="file"
                     multiple
                     name="myfile"
+                    :style="{
+                        opacity: '0 !important;',
+                    }"
                     v-on:change="selectFiles($event)"
                 />
             </div>
@@ -110,7 +113,7 @@
         <div class="fm-modal-footer">
             <button
                 type="button"
-                class="inline-flex w-fit rounded-lg bg-green-400/80 px-3 py-2 text-lg font-semibold items-center text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white disabled:opacity-50 disabled:hover:scale-100"
+                class="inline-flex w-fit rounded-lg bg-green-600 dark:bg-green-400 px-3 py-2 text-lg font-semibold items-center text-black shadow-lg transition-all ease-in-out hover:scale-105 dark:text-white disabled:opacity-50 disabled:hover:scale-100"
                 v-bind:disabled="!countFiles"
                 v-on:click="uploadFiles"
             >
