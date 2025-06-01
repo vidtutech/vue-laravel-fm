@@ -13,20 +13,18 @@
         </div>
         <div class="fm-modal-body">
             <div class="relative flex w-full" v-show="!progressBar">
-                <button
-                    type="button"
-                    class="inline-flex w-full rounded-xl bg-black px-3 py-2 text-base font-bold justify-center items-center text-white shadow-lg transition-all ease-in-out hover:scale-105 dark:bg-white dark:text-black"
+                <label
+                    for="fileInput"
+                    class="inline-flex w-full rounded-xl bg-black px-3 py-2 text-base cursor-pointer font-bold justify-center items-center text-white shadow-lg transition-all ease-in-out dark:bg-white dark:text-black"
                 >
                     {{ lang.btn.uploadSelect }}
-                </button>
+                </label>
                 <input
-                    class="absolute inset-0 cursor-pointer opacity-0"
+                    id="fileInput"
+                    class="hidden"
                     type="file"
                     multiple
                     name="myfile"
-                    :style="{
-                        opacity: '0 !important;',
-                    }"
                     v-on:change="selectFiles($event)"
                 />
             </div>
