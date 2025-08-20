@@ -11,7 +11,7 @@
                     >
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="backDisabled"
                             v-on:click="historyBack()"
                         >
@@ -26,7 +26,7 @@
                     >
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="forwardDisabled"
                             v-on:click="historyForward()"
                         >
@@ -36,7 +36,7 @@
                     <div v-tooltip="{ content: lang.btn.refresh, distance: 10 }">
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-on:click="refreshAll()"
                         >
                             <i class="bi bi-arrow-repeat text-lg"></i>
@@ -52,7 +52,7 @@
                         <!-- this download button is only for smaller screens -->
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="!isAnyItemSelected"
                             v-on:click="downloadFiles()"
                         >
@@ -64,7 +64,7 @@
                     <div v-tooltip="{ content: lang.btn.file, distance: 10 }">
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-on:click="showModal('NewFileModal')"
                         >
                             <i class="bi bi-file-plus text-lg"></i>
@@ -73,7 +73,7 @@
                     <div v-tooltip="{ content: lang.btn.folder, distance: 10 }">
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-on:click="showModal('NewFolderModal')"
                         >
                             <i class="bi bi-folder-plus text-lg"></i>
@@ -82,7 +82,7 @@
                     <div v-tooltip="{ content: uploading ? 'Uploading...' : lang.btn.upload, distance: 10 }">
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="uploading"
                             v-on:click="showModal('UploadModal')"
                         >
@@ -99,7 +99,7 @@
                         <!-- this download button is only for larger screens -->
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="!isAnyItemSelected"
                             v-on:click="downloadFiles()"
                         >
@@ -116,7 +116,7 @@
                     >
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="!isAnyItemSelected"
                             v-on:click="toClipboard('cut')"
                         >
@@ -131,7 +131,7 @@
                     >
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="!isAnyItemSelected"
                             v-on:click="toClipboard('copy')"
                         >
@@ -141,7 +141,7 @@
                     <div v-tooltip="{ content: clipboardType ? lang.btn.paste : 'nothing to paste', distance: 10 }">
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="!clipboardType"
                             v-on:click="paste()"
                         >
@@ -156,7 +156,7 @@
                     >
                         <button
                             type="button"
-                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                            class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                             v-bind:disabled="!isAnyItemSelected"
                             v-on:click="showModal('DeleteModal')"
                         >
@@ -174,7 +174,7 @@
                 >
                     <button
                         type="button"
-                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                        class="flex aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                         v-on:click="selectView(viewType === 'grid' ? 'table' : 'grid')"
                     >
                         <i :class="['text-lg', 'bi', 'bi-' + (viewType === 'grid' ? 'list-ul' : 'grid')]"></i>
@@ -188,7 +188,7 @@
                 >
                     <button
                         type="button"
-                        class="flex lg:hidden aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-full ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
+                        class="flex lg:hidden aspect-square h-10 w-full min-w-fit max-w-10 cursor-pointer items-center justify-center rounded-xl ring-1 ring-dark dark:ring-light hover:bg-black dark:hover:bg-white text-dark hover:text-light dark:text-light dark:hover:text-dark disabled:pointer-events-none disabled:opacity-50"
                         v-on:click="toggleMenu"
                     >
                         <i class="bi bi-three-dots-vertical"></i>
